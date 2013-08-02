@@ -1,4 +1,6 @@
 SesusoEms::Application.routes.draw do
+  resources :customers
+
   authenticated :user do
     root :to => 'home#index'
   end
