@@ -1,0 +1,2 @@
+module BallTablesHelper
+end

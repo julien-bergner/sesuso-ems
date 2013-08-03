@@ -1,4 +1,6 @@
 SesusoEms::Application.routes.draw do
+  resources :ball_tables
+
   resources :orders
 
   resources :customers
