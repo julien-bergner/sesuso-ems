@@ -1,4 +1,6 @@
 SesusoEms::Application.routes.draw do
+  resources :orders
+
   resources :customers
 
   authenticated :user do

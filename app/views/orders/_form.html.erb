@@ -1,0 +1,12 @@
+<%= simple_form_for @order, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :order_status_id %>
+  <%= f.input :overall_amount %>
+  <%= f.input :delivery_method %>
+  <%= f.input :payment_method %>
+  <%= f.input :customer_id %>
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                orders_path, :class => 'btn' %>
+  </div>
+<% end %>
