@@ -1,4 +1,6 @@
 SesusoEms::Application.routes.draw do
+  resources :order_items
+
   resources :products
 
   resources :seats
