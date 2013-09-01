@@ -11,11 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130831151714) do
+ActiveRecord::Schema.define(:version => 20130901220353) do
 
   create_table "ball_tables", :force => true do |t|
     t.string   "caption"
-    t.string   "type"
+    t.string   "table_type"
     t.integer  "floor"
     t.float    "price"
     t.integer  "position_x"
