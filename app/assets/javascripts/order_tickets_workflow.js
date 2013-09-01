@@ -1,23 +1,8 @@
 window.onload = function () {
-    var paper = new Raphael(document.getElementById('floor_plan'), 800, 1100);
+    var paper = new Raphael(document.getElementById('floor_plan'), 850, 1200);
 
     first_floor_drawables = create_first_floor_drawables(paper);
     second_floor_drawables = create_second_floor_drawables(paper);
-    hide_all(first_floor_drawables);
-    hide_all(second_floor_drawables);
-
-    show_all(first_floor_drawables);
-
-    $( "#first_floor" ).click(function() {
-        hide_all(second_floor_drawables);
-        show_all(first_floor_drawables);
-    });
-
-    $( "#second_floor" ).click(function() {
-        hide_all(first_floor_drawables);
-        show_all(second_floor_drawables);
-    });
-
 
 }
 
@@ -27,45 +12,58 @@ function create_first_floor_drawables(paper) {
 
     var first_floor_drawables = [];
 
+    var x_offset = 0;
+    var y_offset = 50;
+
+    // Label
+    first_floor_drawables.push(paper.text(x_offset + 200, y_offset - 25, "Erdgeschoss").attr(
+        {"font-family":"arial",
+            "font-weight":"900",
+            "font-size":"25",
+            "text-align":"left",
+            "fill":"#289784"}
+    ));
+
+
     // Background
-    first_floor_drawables.push(paper.rect(0, 0, 800, 1100).attr({"fill":"white", "stroke": "white", "stroke-width":"0"}));
+    first_floor_drawables.push(paper.rect(x_offset + 0, y_offset + 0, 400, 550).attr({"fill":"white", "stroke": "white", "stroke-width":"0"}));
 
     // Outline
-    first_floor_drawables.push(paper.path("M 200 0 l 600 0 l 0 1100 l -600 0 l -200 -130 l 0 -840 z").attr({"stroke-width":"10px", "stroke":"#289784"}));
+    first_floor_drawables.push(paper.path("M " + (x_offset + 100) + " " + (y_offset + 0) + " l 300 0 l 0 550 l -300 0 l -100 -65 l 0 -420 z").attr({"stroke-width":"6px", "stroke":"#289784"}));
 
     // Stage
-    first_floor_drawables.push(paper.path("M 300 0 l -300 200").attr({"stroke-width":"6px", "stroke":"#289784"}));
+    first_floor_drawables.push(paper.path("M " + (x_offset + 150) + " " + (y_offset + 0) + " 0 l -150 100").attr({"stroke-width":"5px", "stroke":"#289784"}));
 
     // Stage label
-    first_floor_drawables.push(paper.text(120, 85, "Musik").attr(
+    first_floor_drawables.push(paper.text(x_offset + 60, y_offset + 42, "Musik").attr(
         {"font-family":"arial",
-            "font-size":"40",
+            "font-size":"22",
             "text-align":"left",
             "fill":"#289784"}
     ).rotate(-34));
 
     // Bar
-    first_floor_drawables.push(paper.rect(740, 450, 60, 250).attr({"stroke-width":"6px","stroke":"#289784"}));
+    first_floor_drawables.push(paper.rect(x_offset + 370, y_offset + 225, 30, 125).attr({"stroke-width":"5px","stroke":"#289784"}));
 
     // Bar label
-    first_floor_drawables.push(paper.text(770, 580, "Bar").attr(
+    first_floor_drawables.push(paper.text(x_offset + 385, y_offset + 290, "Bar").attr(
         {"font-family":"arial",
-            "font-size":"40",
+            "font-size":"25",
             "text-align":"left",
             "fill":"#289784"}
     ).rotate(-90));
 
     // Tables
-    first_floor_drawables.push(paper.rect(620, 270, 150, 100).attr({"stroke-width":"10px", "fill":"#289784", "stroke":"#289784"}));
-    first_floor_drawables.push(paper.rect(620, 30, 150, 200).attr({"stroke-width":"10px", "fill":"#289784", "stroke":"#289784"}));
-    first_floor_drawables.push(paper.rect(200, 80, 100, 100).attr({"stroke-width":"10px", "fill":"#289784", "stroke":"#289784"}).rotate(-34));
-    first_floor_drawables.push(paper.circle(470, 110, 80).attr({"stroke-width":"10px", "fill":"#289784", "stroke":"#289784"}));
-    first_floor_drawables.push(paper.rect(30, 260, 200, 150).attr({"stroke-width":"10px", "fill":"#289784", "stroke":"#289784"}));
-    first_floor_drawables.push(paper.circle(130, 530, 80).attr({"stroke-width":"10px", "fill":"#289784", "stroke":"#289784"}));
-    first_floor_drawables.push(paper.rect(30, 650, 200, 150).attr({"stroke-width":"10px", "fill":"#289784", "stroke":"#289784"}));
-    first_floor_drawables.push(paper.circle(150, 920, 80).attr({"stroke-width":"10px", "fill":"#289784", "stroke":"#289784"}));
-    first_floor_drawables.push(paper.rect(300, 870, 150, 200).attr({"stroke-width":"10px", "fill":"#289784", "stroke":"#289784"}));
-    first_floor_drawables.push(paper.circle(580, 970, 80).attr({"stroke-width":"10px", "fill":"#289784", "stroke":"#289784"}));
+    first_floor_drawables.push(paper.rect(x_offset + 310, y_offset + 135, 75, 50).attr({"stroke-width":"5px", "fill":"#289784", "stroke":"#289784"}));
+    first_floor_drawables.push(paper.rect(x_offset + 310, y_offset + 15, 75, 100).attr({"stroke-width":"5px", "fill":"#289784", "stroke":"#289784"}));
+    first_floor_drawables.push(paper.rect(x_offset + 100, y_offset + 40, 50, 50).attr({"stroke-width":"5px", "fill":"#289784", "stroke":"#289784"}).rotate(-34));
+    first_floor_drawables.push(paper.circle(x_offset + 235, y_offset + 55, 40).attr({"stroke-width":"5px", "fill":"#289784", "stroke":"#289784"}));
+    first_floor_drawables.push(paper.rect(x_offset + 15, y_offset + 130, 100, 75).attr({"stroke-width":"5px", "fill":"#289784", "stroke":"#289784"}));
+    first_floor_drawables.push(paper.circle(x_offset + 65, y_offset + 265, 40).attr({"stroke-width":"5px", "fill":"#289784", "stroke":"#289784"}));
+    first_floor_drawables.push(paper.rect(x_offset + 15, y_offset + 325, 100, 75).attr({"stroke-width":"5px", "fill":"#289784", "stroke":"#289784"}));
+    first_floor_drawables.push(paper.circle(x_offset + 75, y_offset + 460, 40).attr({"stroke-width":"5px", "fill":"#289784", "stroke":"#289784"}));
+    first_floor_drawables.push(paper.rect(x_offset + 150, y_offset + 435, 75, 100).attr({"stroke-width":"5px", "fill":"#289784", "stroke":"#289784"}));
+    first_floor_drawables.push(paper.circle(x_offset + 290, y_offset + 485, 40).attr({"stroke-width":"5px", "fill":"#289784", "stroke":"#289784"}));
 
     return first_floor_drawables;
 }
@@ -74,48 +72,50 @@ function create_second_floor_drawables(paper) {
 
     var second_floor_drawables = [];
 
+    var x_offset = 430;
+    var y_offset = 50;
+
+    // Label
+    second_floor_drawables.push(paper.text(x_offset + 200, y_offset -25, "Obergeschoss").attr(
+        {"font-family":"arial",
+            "font-weight":"900",
+            "font-size":"25",
+            "text-align":"left",
+            "fill":"#289784"}
+    ));
+
     // Background
-    second_floor_drawables.push(paper.rect(0, 0, 800, 1100).attr({"fill":"white", "stroke": "white", "stroke-width":"0"}));
+    second_floor_drawables.push(paper.rect(x_offset + 0, y_offset + 0, 400, 550).attr({"fill":"white", "stroke": "white", "stroke-width":"0"}));
 
     // Outline
-    second_floor_drawables.push(paper.path("M 200 0 l 600 0 l 0 1100 l -600 0 l -200 -130 l 0 -840 z").attr({"stroke-width":"10px", "stroke":"#289784"}));
+    second_floor_drawables.push(paper.path("M " + (x_offset + 100) + " " + (y_offset + 0) + " l 300 0 l 0 550 l -300 0 l -100 -65 l 0 -420 z").attr({"stroke-width":"6px", "stroke":"#289784"}));
 
     // Bar
-    second_floor_drawables.push(paper.rect(430, 720, 370, 60).attr({"stroke-width":"6px","stroke":"#289784"}));
+    second_floor_drawables.push(paper.rect(x_offset + 215, y_offset + 360, 185, 30).attr({"stroke-width":"5px","stroke":"#289784"}));
 
     // Bar label
-    second_floor_drawables.push(paper.text(610, 750, "Bar").attr(
+    second_floor_drawables.push(paper.text(x_offset + 305, y_offset + 375, "Bar").attr(
         {"font-family":"arial",
-            "font-size":"40",
+
+            "font-size":"25",
             "text-align":"left",
             "fill":"#289784"}
     ));
 
     // Tables
-    second_floor_drawables.push(paper.circle(630, 110, 80).attr({"stroke-width":"10px", "fill":"#289784", "stroke":"#289784"}));
-    second_floor_drawables.push(paper.rect(340, 30, 150, 200).attr({"stroke-width":"10px", "fill":"#289784", "stroke":"#289784"}));
-    second_floor_drawables.push(paper.circle(200, 140, 80).attr({"stroke-width":"10px", "fill":"#289784", "stroke":"#289784"}));
-    second_floor_drawables.push(paper.rect(30, 260, 200, 150).attr({"stroke-width":"10px", "fill":"#289784", "stroke":"#289784"}));
-    second_floor_drawables.push(paper.circle(130, 530, 80).attr({"stroke-width":"10px", "fill":"#289784", "stroke":"#289784"}));
-    second_floor_drawables.push(paper.rect(30, 650, 200, 150).attr({"stroke-width":"10px", "fill":"#289784", "stroke":"#289784"}));
-    second_floor_drawables.push(paper.circle(150, 920, 80).attr({"stroke-width":"10px", "fill":"#289784", "stroke":"#289784"}));
-    second_floor_drawables.push(paper.rect(290, 970, 150, 100).attr({"stroke-width":"10px", "fill":"#289784", "stroke":"#289784"}));
-    second_floor_drawables.push(paper.rect(670, 540, 100, 150).attr({"stroke-width":"10px", "fill":"#289784", "stroke":"#289784"}));
-    second_floor_drawables.push(paper.rect(430, 540, 200, 150).attr({"stroke-width":"10px", "fill":"#289784", "stroke":"#289784"}));
+    second_floor_drawables.push(paper.circle(x_offset + 315, y_offset + 55, 40).attr({"stroke-width":"5px", "fill":"#289784", "stroke":"#289784"}));
+    second_floor_drawables.push(paper.rect(x_offset + 170, y_offset + 15, 75, 100).attr({"stroke-width":"5px", "fill":"#289784", "stroke":"#289784"}));
+    second_floor_drawables.push(paper.circle(x_offset + 100, y_offset + 70, 40).attr({"stroke-width":"5px", "fill":"#289784", "stroke":"#289784"}));
+    second_floor_drawables.push(paper.rect(x_offset + 15, y_offset + 130, 100, 75).attr({"stroke-width":"5px", "fill":"#289784", "stroke":"#289784"}));
+    second_floor_drawables.push(paper.circle(x_offset + 65, y_offset + 265, 40).attr({"stroke-width":"5px", "fill":"#289784", "stroke":"#289784"}));
+    second_floor_drawables.push(paper.rect(x_offset + 15, y_offset + 325, 100, 75).attr({"stroke-width":"5px", "fill":"#289784", "stroke":"#289784"}));
+    second_floor_drawables.push(paper.circle(x_offset + 75, y_offset + 460, 40).attr({"stroke-width":"5px", "fill":"#289784", "stroke":"#289784"}));
+    second_floor_drawables.push(paper.rect(x_offset + 145, y_offset + 485, 75, 50).attr({"stroke-width":"5px", "fill":"#289784", "stroke":"#289784"}));
+    second_floor_drawables.push(paper.rect(x_offset + 335, y_offset + 270, 50, 75).attr({"stroke-width":"5px", "fill":"#289784", "stroke":"#289784"}));
+    second_floor_drawables.push(paper.rect(x_offset + 215, y_offset + 270, 100, 75).attr({"stroke-width":"5px", "fill":"#289784", "stroke":"#289784"}));
 
     return second_floor_drawables;
 }
 
-function hide_all(array_of_drawables) {
-    for(var i = 0; i < array_of_drawables.length; i++) {
-        array_of_drawables[i].hide();
-    }
-}
-
-function show_all(array_of_drawables) {
-    for(var i = 0; i < array_of_drawables.length; i++) {
-        array_of_drawables[i].show();
-    }
-}
 
 
