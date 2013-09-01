@@ -1,10 +1,10 @@
 class OrderTicketsWorkflowController < ApplicationController
 
   def start
-    redirect_to :action => 'select_seats'
+    redirect_to :action => 'select_table'
   end
 
-  def select_seats
+  def select_table
 
   end
 
