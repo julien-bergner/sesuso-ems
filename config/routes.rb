@@ -5,8 +5,6 @@ SesusoEms::Application.routes.draw do
 
   resources :products
 
-  resources :seats
-
   resources :orders
 
   resources :customers
