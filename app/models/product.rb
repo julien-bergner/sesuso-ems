@@ -1,3 +1,3 @@
 class Product < ActiveRecord::Base
-  attr_accessible :caption, :category_id, :number, :price
+  attr_accessible :caption, :category_id, :number, :price; :quantity
 end
