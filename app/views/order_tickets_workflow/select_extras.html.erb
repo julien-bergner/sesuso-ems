@@ -1,0 +1,45 @@
+<h3>Möchten Sie Speisen bestellen?</h3>
+<table class="form-inline">
+  <tr class="hide_if_no_icon">
+    <td><h3>0</h3></td>
+    <td><h3>x&nbsp;</h3></td>
+    <td>
+      <div class="btn-group btn-group-vertical">
+        <button type="button" class="btn btn-warning"><i class="icon-plus-sign"></i></button>
+        <button type="button" class="btn btn-warning"><i class="icon-minus-sign"></i></button>
+      </div>
+    </td>
+    <td><h3>&nbsp;</h3></td>
+    <td><h3>Antipasti-Teller á 8 €</h3></td>
+  </tr>
+  <tr><td>&nbsp;</td></tr>
+  <tr class="hide_if_no_icon">
+    <td><h3>0</h3></td>
+    <td><h3>x&nbsp;</h3></td>
+    <td>
+      <div class="btn-group btn-group-vertical">
+        <button type="button" class="btn btn-warning"><i class="icon-plus-sign"></i></button>
+        <button type="button" class="btn btn-warning"><i class="icon-minus-sign"></i></button>
+      </div>
+    </td>
+    <td><h3>&nbsp;</h3></td>
+    <td><h3>Suppe á 8 €</h3></td>
+  </tr>
+</table>
+
+
+
+<hr>
+
+<%= form_tag url_for(:controller => "order_tickets_workflow", :action => "receive_selected_extras"), :method => "put" %>
+<%= hidden_field_tag :selected_amount_of_seats, "" %>
+
+
+<div class="form-actions">
+  <%= link_to("Zurück", url_for(:controller => "order_tickets_workflow", :action => "select_amount_of_seats") , {:class => "btn"}) %>
+  <%= submit_tag("Weiter", :class => "btn btn-warning") %>
+</div>
+
+
+
+

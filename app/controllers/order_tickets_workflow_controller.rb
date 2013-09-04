@@ -24,6 +24,16 @@ class OrderTicketsWorkflowController < ApplicationController
 
   def receive_selected_amount_of_seats
 
+    redirect_to :action => 'select_extras'
+
+  end
+
+  def select_extras
+
+  end
+
+  def receive_selected_extras
+
   end
 
 end
