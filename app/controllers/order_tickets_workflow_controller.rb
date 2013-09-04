@@ -33,6 +33,22 @@ class OrderTicketsWorkflowController < ApplicationController
   end
 
   def receive_selected_extras
+    redirect_to :action => "provide_customer_data"
+  end
+
+  def provide_customer_data
+
+  end
+
+  def receive_customer_data
+
+  end
+
+  def show_summary
+
+  end
+
+  def receive_confirmation
 
   end
 

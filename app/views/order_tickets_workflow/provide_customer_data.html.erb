@@ -1,0 +1,47 @@
+<h3>Bitte geben Sie Ihre Daten ein:</h3>
+
+<div id="customer-form-container">
+  <%= form_for url_for(:controller => "order_tickets_workflow", :action => "receive_customer_data"),:html => { :class => 'form-horizontal' } do |f| %>
+
+
+      <div class="control-group">
+        <%= f.label :designation, "Anrede", :class => 'control-label' %>
+        <div class="controls">
+          <%= f.label :designation_male, :class => 'radio' do %>
+              Herr
+              <%= f.radio_button :designation, :male %>
+          <% end %>
+        </div>
+        <div class="controls">
+          <%= f.label :designation_female, :class => 'radio' do %>
+              Frau
+              <%= f.radio_button :designation, :female %>
+          <% end %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :first_name, "Vorname", :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :first_name, :class => 'text_field input-medium' %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :last_name, "Nachname", :class => 'control-label input-medium' %>
+        <div class="controls">
+          <%= f.text_field :last_name, :class => 'text_field input-medium' %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :email, "E-Mail", :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :email, :class => 'text_field input-medium' %>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <%= link_to "Abbrechen", "", :class => 'btn' %>
+        <%= f.submit "Weiter", :class => 'btn btn-inverse' %>
+      </div>
+  <% end %>
+  </div>
+</div>
