@@ -1,0 +1,27 @@
+<h2><u>Zusammenfassung</u></h2>
+
+<h3 style="color: #00FF00">Sie haben gewählt:</h3>
+<h3>2x Karten an Tisch 2 á 65 € = 130 €
+<br>
+2x Antipasti-Teller &nbsp;&nbsp;&nbsp;&nbsp;á 8 € &nbsp;&nbsp;= &nbsp;&nbsp;16 € </h3>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  Gesamtpreis: 146 €</h3>
+
+<div id="customer-view-container">
+  <h3 style="color: #00FF00">Ihre Angaben:</h3>
+
+  <dl class="dl-horizontal">
+        <dt class="customer-view-element">Anrede:</dt>
+        <dd class="customer-view-element">Herr</dd>
+    <dt class="customer-view-element">Vorname:</dt>
+    <dd class="customer-view-element">Max</dd>
+    <dt class="customer-view-element">Nachname:</dt>
+    <dd class="customer-view-element">Mustermann</dd>
+    <dt class="customer-view-element">E-Mail-Adresse:</dt>
+    <dd class="customer-view-element">Max.Mustermann@googlemail.de</dd>
+  </dl>
+</div>
+
+<%= link_to "Abbrechen", "", :class => 'btn' %>
+<%= link_to "Verbindlich absenden", url_for(:controller => "order_tickets_workflow", :action => "show_bank_data"), :class => 'btn btn-warning' %>

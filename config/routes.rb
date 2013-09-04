@@ -14,7 +14,7 @@ SesusoEms::Application.routes.draw do
   end
   root :to => "home#index"
 
-  get ':controller/:action'
+  match ':controller/:action'
   get 'order_tickets_workflow/start', to: 'order_tickets_workflow#start'
   put 'order_tickets_workflow/receive_selected_amount_of_seats', to: 'order_tickets_workflow#receive_selected_amount_of_seats'
   put 'order_tickets_workflow/receive_selected_extras', to: 'order_tickets_workflow#receive_selected_extras'

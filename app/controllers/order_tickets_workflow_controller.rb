@@ -41,6 +41,7 @@ class OrderTicketsWorkflowController < ApplicationController
   end
 
   def receive_customer_data
+    redirect_to :action => "show_summary"
 
   end
 
@@ -49,6 +50,10 @@ class OrderTicketsWorkflowController < ApplicationController
   end
 
   def receive_confirmation
+
+  end
+
+  def show_bank_data
 
   end
 
