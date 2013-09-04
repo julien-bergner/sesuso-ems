@@ -9,8 +9,8 @@ class OrderTicketsWorkflowController < ApplicationController
   end
 
   def get_ball_tables
-    @ballTables = BallTable.all
-    render :json => @ballTables.to_json
+    @ball_tables = BallTable.all
+    render :json => @ball_tables.to_json
   end
 
   def receive_selected_table
@@ -19,7 +19,11 @@ class OrderTicketsWorkflowController < ApplicationController
   end
 
   def select_amount_of_seats
-    @selected_table_id = params[:selected_table_id]
+    @selected_table = BallTable.find(params[:selected_table_id])
+  end
+
+  def receive_selected_amount_of_seats
+
   end
 
 end
