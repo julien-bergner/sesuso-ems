@@ -10,7 +10,8 @@ var second_floor_y_offset = 50;
 
 window.onload = function () {
 
-    $.getJSON("http://dd.sesuso.de/order_tickets_workflow/get_ball_tables",
+    //$.getJSON("http://dd.sesuso.de/order_tickets_workflow/get_ball_tables",
+    $.getJSON("http://localhost:3000/order_tickets_workflow/get_ball_tables",
         function(result){
             data_loaded_callback(result);
         }.bind(this)
@@ -52,7 +53,8 @@ function create_ball_tables(paper, ball_table_data) {
             }
             rect.data({"id": ball_table_data[i].id});
             rect.click(function () {
-                window.location = "http://dd.sesuso.de/order_tickets_workflow/receive_selected_table?selected_table_id=" + this.data("id");
+                //window.location = "http://dd.sesuso.de/order_tickets_workflow/receive_selected_table?selected_table_id=" + this.data("id");
+                window.location = "http://localhost:3000/order_tickets_workflow/receive_selected_table?selected_table_id=" + this.data("id");
             });
             ball_tables.push(rect);
         } else if (ball_table_data[i].table_type == "circle") {
@@ -60,7 +62,8 @@ function create_ball_tables(paper, ball_table_data) {
             var circle = paper.circle(x_offset + ball_table_data[i].position_x, y_offset + ball_table_data[i].position_y, ball_table_data[i].radius).attr({"stroke-width":standard_stroke_width, "fill":standard_stroke_color, "stroke":standard_stroke_color});
             circle.data({"id": ball_table_data[i].id});
             circle.click(function () {
-                window.location = "http://dd.sesuso.de/order_tickets_workflow/receive_selected_table?selected_table_id=" + this.data("id");
+                //window.location = "http://dd.sesuso.de/order_tickets_workflow/receive_selected_table?selected_table_id=" + this.data("id");
+                window.location = "http://localhost:3000/order_tickets_workflow/receive_selected_table?selected_table_id=" + this.data("id");
             });
         }
     }
