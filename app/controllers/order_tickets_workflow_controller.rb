@@ -15,20 +15,35 @@ class OrderTicketsWorkflowController < ApplicationController
 
   def receive_selected_table
     selected_table_id = params[:selected_table_id]
-    redirect_to :action => 'select_amount_of_seats', :selected_table_id => selected_table_id
+    session[:selected_table_id] = selected_table_id
+    redirect_to :action => 'select_amount_of_seats'
   end
 
   def select_amount_of_seats
-    @selected_table = BallTable.find(params[:selected_table_id])
+    selected_table_id = session[:selected_table_id]
+    if selected_table_id.nil?
+      redirect_to redirect_to :action => 'select_table'
+    else
+      @selected_table = BallTable.find(selected_table_id)
+    end
+
   end
 
   def receive_selected_amount_of_seats
-
+    session[:selected_amount_of_seats] = params[:selected_amount_of_seats]
     redirect_to :action => 'select_extras'
 
   end
 
   def select_extras
+    if session[:selected_table_id].nil?
+      redirect_to :action => 'start'
+    elsif session[:selected_amount_of_seats].nil?
+      redirect_to :action => "select_amount_of_seats"
+    else
+      @test1 = session[:selected_amount_of_seats]
+      @test2 = session[:selected_table_id]
+    end
 
   end
 
