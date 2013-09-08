@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130908160103) do
+ActiveRecord::Schema.define(:version => 20130908214949) do
 
   create_table "ball_tables", :force => true do |t|
     t.string   "caption"
@@ -82,7 +82,8 @@ ActiveRecord::Schema.define(:version => 20130908160103) do
     t.string   "type"
     t.integer  "quantity"
     t.integer  "ball_table_id"
-    t.string   "description"
+    t.string   "description1"
+    t.string   "description2"
   end
 
   create_table "roles", :force => true do |t|
