@@ -64,7 +64,11 @@ Seat.create!( :caption => "Karte", :price => "65", :quantity => 8, :ball_table_i
 
 
 # Categories
-Category.create!(:caption => "Food")
+c = Category.create!(:caption => "Food")
+Product.create!( :caption => "Product 1", :price => "9", :quantity => 999, :category_id => c.id)
+Product.create!( :caption => "Product 2", :price => "9", :quantity => 999, :category_id => c.id)
+Product.create!( :caption => "Product 3", :price => "9", :quantity => 999, :category_id => c.id)
+
 
 
 
