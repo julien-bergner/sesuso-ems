@@ -1,3 +1,5 @@
+# Ball tables and seats
+
 # First floor
 t1 = BallTable.create!( :caption => "Tisch 1", :floor => "1", :table_type => "rect", :price => "0", :position_x => "310", :position_y => "135", :radius => "0", :width => "75", :height => "50")
 Seat.create!( :caption => "Karte", :price => "65", :quantity => 4, :ball_table_id => t1.id)
@@ -61,6 +63,8 @@ t20 = BallTable.create!( :caption => "Tisch 20", :floor => "2", :table_type => "
 Seat.create!( :caption => "Karte", :price => "65", :quantity => 8, :ball_table_id => t20.id)
 
 
+# Categories
+Category.create!(:caption => "Food")
 
 
 
