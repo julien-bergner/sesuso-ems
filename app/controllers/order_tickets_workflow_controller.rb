@@ -45,6 +45,9 @@ class OrderTicketsWorkflowController < ApplicationController
       @test2 = session[:selected_table_id]
     end
 
+    @food_category = Category.find_by_caption("Food")
+    @extras = Product.find_all_by_category_id(@food_category.id)
+
   end
 
   def receive_selected_extras
