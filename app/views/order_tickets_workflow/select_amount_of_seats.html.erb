@@ -1,6 +1,7 @@
+
 <%= javascript_tag "var max_available_amount = #{@selected_table.seat.quantity}" %>
 <%= javascript_tag "var start_amount = #{1}" %>
-
+<%= javascript_include_tag "order_tickets_workflow/select_amount_of_seats" %>
 
 <h3>Wie viele Karten möchten Sie bestellen?</h3>
 <table class="form-inline">
