@@ -63,7 +63,7 @@ function create_ball_tables(paper, ball_table_data) {
                 rect.rotate(-34);
             }
             rect.data({"id": ball_table_data[i].id});
-            if(ball_table_data[i].get_number_of_available_seats == 0) {
+            if(ball_table_data[i].get_number_of_available_seats <= 0) {
                 var caption = paper.text(x_offset + ball_table_data[i].position_x + 30 + extra_text_offset, y_offset + ball_table_data[i].position_y + 30, full_text).attr(
                     {"font-family":"arial",
                         "font-weight":"700",
@@ -90,7 +90,7 @@ function create_ball_tables(paper, ball_table_data) {
 
             var circle = paper.circle(x_offset + ball_table_data[i].position_x, y_offset + ball_table_data[i].position_y, ball_table_data[i].radius).attr({"stroke-width":standard_stroke_width, "fill":standard_stroke_color, "stroke":standard_stroke_color});
             circle.data({"id": ball_table_data[i].id});
-            if(ball_table_data[i].get_number_of_available_seats == 0) {
+            if(ball_table_data[i].get_number_of_available_seats <= 0) {
                 var caption = paper.text(x_offset + ball_table_data[i].position_x, y_offset + ball_table_data[i].position_y, full_text).attr(
                     {"font-family":"arial",
                         "font-weight":"700",
