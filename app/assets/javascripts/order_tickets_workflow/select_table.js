@@ -51,10 +51,10 @@ function create_ball_tables(paper, ball_table_data) {
             }
             rect.data({"id": ball_table_data[i].id});
             if(ball_table_data[i].get_number_of_available_seats == 0) {
-                var caption = paper.text(x_offset + ball_table_data[i].position_x + 30, y_offset + ball_table_data[i].position_y + 20, "ausver-\nkauft").attr(
+                var caption = paper.text(x_offset + ball_table_data[i].position_x + 30, y_offset + ball_table_data[i].position_y + 30,  ball_table_data[i].caption + "\n(ausver-\nkauft)").attr(
                     {"font-family":"arial",
-                        "font-weight":"900",
-                        "font-size":"15",
+                        "font-weight":"700",
+                        "font-size":"13",
                         "text-align":"center",
                         "fill":"#fff"}
                 );
@@ -62,10 +62,10 @@ function create_ball_tables(paper, ball_table_data) {
                 caption.click(empty_table_clicked);
                 rect.click(empty_table_clicked);
             } else {
-                var caption = paper.text(x_offset + ball_table_data[i].position_x + 25, y_offset + ball_table_data[i].position_y + 20, "Plätze\nfrei").attr(
+                var caption = paper.text(x_offset + ball_table_data[i].position_x + 38, y_offset + ball_table_data[i].position_y + 20, ball_table_data[i].caption + "\n(Plätze frei)").attr(
                     {"font-family":"arial",
-                        "font-weight":"900",
-                        "font-size":"15",
+                        "font-weight":"700",
+                        "font-size":"13",
                         "text-align":"center",
                         "fill":"#fff"}
                 );
@@ -78,10 +78,10 @@ function create_ball_tables(paper, ball_table_data) {
             var circle = paper.circle(x_offset + ball_table_data[i].position_x, y_offset + ball_table_data[i].position_y, ball_table_data[i].radius).attr({"stroke-width":standard_stroke_width, "fill":standard_stroke_color, "stroke":standard_stroke_color});
             circle.data({"id": ball_table_data[i].id});
             if(ball_table_data[i].get_number_of_available_seats == 0) {
-                var caption = paper.text(x_offset + ball_table_data[i].position_x, y_offset + ball_table_data[i].position_y, "ausver-\nkauft").attr(
+                var caption = paper.text(x_offset + ball_table_data[i].position_x, y_offset + ball_table_data[i].position_y, ball_table_data[i].caption + "\n(ausver-\nkauft)").attr(
                     {"font-family":"arial",
-                        "font-weight":"900",
-                        "font-size":"15",
+                        "font-weight":"700",
+                        "font-size":"13",
                         "text-align":"center",
                         "fill":"#fff"}
                 );
@@ -89,10 +89,10 @@ function create_ball_tables(paper, ball_table_data) {
                 caption.click(empty_table_clicked);
                 circle.click(empty_table_clicked);
             } else {
-                var caption = paper.text(x_offset + ball_table_data[i].position_x, y_offset + ball_table_data[i].position_y, "Plätze\nfrei").attr(
+                var caption = paper.text(x_offset + ball_table_data[i].position_x, y_offset + ball_table_data[i].position_y, ball_table_data[i].caption + "\n(Plätze frei)").attr(
                     {"font-family":"arial",
-                        "font-weight":"900",
-                        "font-size":"15",
+                        "font-weight":"700",
+                        "font-size":"13",
                         "text-align":"center",
                         "fill":"#fff"}
                 );
