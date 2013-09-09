@@ -51,6 +51,7 @@ class OrderTicketsWorkflowController < ApplicationController
   end
 
   def receive_selected_extras
+    bla
     redirect_to :action => "provide_customer_data"
   end
 
