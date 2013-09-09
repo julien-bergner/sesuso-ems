@@ -25,7 +25,7 @@
 
 <%= form_tag url_for(:controller => "order_tickets_workflow", :action => "receive_selected_extras"), :method => "put" %>
 <% @extras.each do |extra|%>
-<%= hidden_field_tag "input-amount-#{extra.id}", "" %>
+<%= hidden_field_tag "input-amount-#{extra.id}", "0" %>
 <% end %>
 
 <h4>Wir halten bestellte Speisen den ganzen Abend über in der dritten Etage bereit.</h4>

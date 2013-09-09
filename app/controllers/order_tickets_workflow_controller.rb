@@ -54,8 +54,11 @@ class OrderTicketsWorkflowController < ApplicationController
     food_category = Category.find_by_caption("Food")
     extras = Product.find_all_by_category_id(food_category.id)
     extras.each do |extra|
+
       amount = params["input-amount-" + extra.id.to_s]
+      if amount == 0 then next end
       OrderItem.create!(:order_id => session[:order_id], :product_id => extra.id, :quantity => amount)
+
     end
 
     redirect_to :action => "provide_customer_data"
