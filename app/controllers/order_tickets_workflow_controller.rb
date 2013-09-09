@@ -51,16 +51,25 @@ class OrderTicketsWorkflowController < ApplicationController
   end
 
   def receive_selected_extras
-    bla
+
     redirect_to :action => "provide_customer_data"
   end
 
   def provide_customer_data
+    @customer = Customer.new
 
   end
 
   def receive_customer_data
-    redirect_to :action => "show_summary"
+    @customer = Customer.new(params[:customer])
+
+    if @customer.save
+      redirect_to :action => "show_summary"
+
+    else
+      render action: "provide_customer_data"
+
+    end
 
   end
 

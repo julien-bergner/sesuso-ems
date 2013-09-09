@@ -1,47 +1,28 @@
 <h3>Bitte geben Sie Ihre Daten ein:</h3>
 
 <div id="customer-form-container">
-  <%= form_tag url_for(:controller => "order_tickets_workflow", :action => "receive_customer_data"),:html => { :class => 'form-horizontal' } %>
+  <%= simple_form_for(@customer, :url => url_for(:controller => "order_tickets_workflow", :action => "receive_customer_data"), :method => :post, :html => {:class => 'form-horizontal' }) do |f| %>
 
-
-      <div class="control-group">
-        <%= label :designation, "Anrede", :class => 'control-label' %>
-        <div class="controls">
-          <%= label :designation_male, :class => 'radio' do %>
-              Herr
-              <%= radio_button_tag :designation, :male %>
-          <% end %>
-        </div>
-        <div class="controls">
-          <%= label :designation_female, :class => 'radio' do %>
-              Frau
-              <%= radio_button_tag :designation, :female %>
-          <% end %>
-        </div>
-      </div>
-      <div class="control-group">
-        <%= label :first_name, "Vorname", :class => 'control-label' %>
-        <div class="controls">
-          <%= text_field :first_name, :class => 'text_field input-medium' %>
-        </div>
-      </div>
-      <div class="control-group">
-        <%= label :last_name, "Nachname", :class => 'control-label input-medium' %>
-        <div class="controls">
-          <%= text_field :last_name, :class => 'text_field input-medium' %>
-        </div>
-      </div>
-      <div class="control-group">
-        <%= label :email, "E-Mail", :class => 'control-label' %>
-        <div class="controls">
-          <%= text_field :email, :class => 'text_field input-medium' %>
-        </div>
-      </div>
+      <%= f.input :salutation, label: "Anrede" %>
+      <%= f.input :first_name, label: "Vorname" %>
+      <%= f.input :last_name, label: "Nachname" %>
+      <%= f.input :street_name, label: "Straße" %>
+      <%= f.input :street_number, label: "Nr." %>
+      <%= f.input :zip_code, label: "PLZ" %>
+      <%= f.input :city, label: "Ort" %>
+      <%= f.input :email, label: "E-Mail" %>
 
       <div class="form-actions">
-        <%= link_to "Abbrechen", "", :class => 'btn' %>
-        <%= submit_tag "Weiter", :class => 'btn btn-warning' %>
+        <%= link_to "Zurück", url_for(:controller => "order_tickets_workflow", :action => "select_extras"), :class => 'btn' %>
+        <%= f.button :submit, "Weiter", :class => 'btn btn-warning' %>
       </div>
 
-  </div>
+  <% end %>
+
+
+
+
+
+
+
 </div>
