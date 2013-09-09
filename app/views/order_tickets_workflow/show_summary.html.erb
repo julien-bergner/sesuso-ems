@@ -1,27 +1,34 @@
-<h2><u>Zusammenfassung</u></h2>
+<h3>Zusammenfassung</h3>
 
-<h3 style="color: #00FF00">Sie haben gewählt:</h3>
-<h3>2x Karten an Tisch 2 á 65 € = 130 €
+<table class="table table-striped" style="width: 500px">
+
+  <% @rows.each do |row| %>
+      <tr>
+        <% row.each do |field| %>
+            <td><h4><%= field.to_s %></h4></td>
+        <% end %>
+      </tr>
+  <% end %>
+
+</table>
+<h3>Gesamtpreis: <%= @order.get_overall_amount %> &euro;</h3>
+
+<hr>
+
+<h3>Kontaktdaten</h3>
+<table>
+  <tr><td><h4>Anrede:</h4></td><td>&nbsp;</td><td><h4 style="font-style: italic;"><%= @customer.salutation %></h4></td></tr>
+  <tr><td><h4>Vorname:</h4></td><td>&nbsp;</td><td><h4 style="font-style: italic;"><%= @customer.first_name %></h4></td></tr>
+  <tr><td><h4>Nachname:</h4></td><td>&nbsp;</td><td><h4 style="font-style: italic;"><%= @customer.last_name %></h4></td></tr>
+  <tr><td><h4>Straße:</h4></td><td>&nbsp;</td><td><h4 style="font-style: italic;"><%= @customer.street_name %></h4></td></tr>
+  <tr><td><h4>Nr.:</h4></td><td>&nbsp;</td><td><h4 style="font-style: italic;"><%= @customer.street_number %></h4></td></tr>
+  <tr><td><h4>PLZ:</h4></td><td>&nbsp;</td><td><h4 style="font-style: italic;"><%= @customer.zip_code %></h4></td></tr>
+  <tr><td><h4>Ort:</h4></td><td>&nbsp;</td><td><h4 style="font-style: italic;"><%= @customer.city %></h4></td></tr>
+  <tr><td><h4>E-Mail:</h4></td><td>&nbsp;</td><td><h4 style="font-style: italic;"><%= @customer.email %></h4></td></tr>
+
+</table>
+
+  <hr>
 <br>
-2x Antipasti-Teller &nbsp;&nbsp;&nbsp;&nbsp;á 8 € &nbsp;&nbsp;= &nbsp;&nbsp;16 € </h3>
-<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  Gesamtpreis: 146 €</h3>
 
-<div id="customer-view-container">
-  <h3 style="color: #00FF00">Ihre Angaben:</h3>
-
-  <dl class="dl-horizontal">
-        <dt class="customer-view-element">Anrede:</dt>
-        <dd class="customer-view-element">Herr</dd>
-    <dt class="customer-view-element">Vorname:</dt>
-    <dd class="customer-view-element">Max</dd>
-    <dt class="customer-view-element">Nachname:</dt>
-    <dd class="customer-view-element">Mustermann</dd>
-    <dt class="customer-view-element">E-Mail-Adresse:</dt>
-    <dd class="customer-view-element">Max.Mustermann@googlemail.de</dd>
-  </dl>
-</div>
-
-<%= link_to "Abbrechen", "", :class => 'btn' %>
 <%= link_to "Verbindlich absenden", url_for(:controller => "order_tickets_workflow", :action => "show_bank_data"), :class => 'btn btn-warning' %>

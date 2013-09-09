@@ -66,29 +66,36 @@ class OrderTicketsWorkflowController < ApplicationController
 
   end
 
-  def receive_customer_data
-    @customer = Customer.new(params[:customer])
+def receive_customer_data
+  @customer = Customer.new(params[:customer])
 
-    if @customer.save
-      redirect_to :action => "show_summary"
+  if @customer.save
+    order = Order.find(session[:order_id])
+    order.customer_id = @customer.id
+    order.save
 
-    else
-      render action: "provide_customer_data"
+    redirect_to :action => "show_summary"
 
-    end
-
-  end
-
-  def show_summary
+  else
+    render action: "provide_customer_data"
 
   end
 
-  def receive_confirmation
+end
 
-  end
+def show_summary
+  @order = Order.find(session[:order_id])
+  @customer = Customer.find(@order.customer.id)
+  @rows = @order.get_summary
 
-  def show_bank_data
+end
 
-  end
+def receive_confirmation
+
+end
+
+def show_bank_data
+
+end
 
 end

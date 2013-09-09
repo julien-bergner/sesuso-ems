@@ -1,6 +1,8 @@
 class Product < ActiveRecord::Base
   attr_accessible :caption, :category_id, :number, :price; :quantity
 
+  has_many :order_items
+
   def get_price()
     return "#{truncate_float_if_whole_number(self.price)}".html_safe
   end
