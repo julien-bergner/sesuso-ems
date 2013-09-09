@@ -10,7 +10,7 @@ class OrderTicketsWorkflowController < ApplicationController
 
   def get_ball_tables
     @ball_tables = BallTable.all
-    render :json => @ball_tables.to_json
+    render :json => @ball_tables.to_json(:methods => :get_number_of_available_seats)
   end
 
   def receive_selected_table

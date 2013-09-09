@@ -50,19 +50,59 @@ function create_ball_tables(paper, ball_table_data) {
                 rect.rotate(-34);
             }
             rect.data({"id": ball_table_data[i].id});
+            if(ball_table_data[i].get_number_of_available_seats == 0) {
+                paper.text(x_offset + ball_table_data[i].position_x + 30, y_offset + ball_table_data[i].position_y + 20, "ausver-\nkauft").attr(
+                    {"font-family":"arial",
+                        "font-weight":"900",
+                        "font-size":"17",
+                        "text-align":"center",
+                        "fill":"#fff"}
+                );
+                rect.click(function () {
+                    //window.location = "http://dd.sesuso.de/order_tickets_workflow/receive_selected_table?selected_table_id=" + this.data("id");
+                    alert("Dieser Tisch ist ausverkauft. Bitte wählen Sie einen anderen Tisch.");
+                });
+            } else {
+                paper.text(x_offset + ball_table_data[i].position_x + 25, y_offset + ball_table_data[i].position_y + 20, "Plätze\nfrei").attr(
+                    {"font-family":"arial",
+                        "font-weight":"900",
+                        "font-size":"17",
+                        "text-align":"center",
+                        "fill":"#fff"}
+                );
             rect.click(function () {
                 //window.location = "http://dd.sesuso.de/order_tickets_workflow/receive_selected_table?selected_table_id=" + this.data("id");
                 window.location = app_host + "/order_tickets_workflow/receive_selected_table?selected_table_id=" + this.data("id");
-            });
+            }); }
             ball_tables.push(rect);
         } else if (ball_table_data[i].table_type == "circle") {
 
             var circle = paper.circle(x_offset + ball_table_data[i].position_x, y_offset + ball_table_data[i].position_y, ball_table_data[i].radius).attr({"stroke-width":standard_stroke_width, "fill":standard_stroke_color, "stroke":standard_stroke_color});
             circle.data({"id": ball_table_data[i].id});
-            circle.click(function () {
-                //window.location = "http://dd.sesuso.de/order_tickets_workflow/receive_selected_table?selected_table_id=" + this.data("id");
-                window.location = app_host + "/order_tickets_workflow/receive_selected_table?selected_table_id=" + this.data("id");
-            });
+            if(ball_table_data[i].get_number_of_available_seats == 0) {
+                paper.text(x_offset + ball_table_data[i].position_x, y_offset + ball_table_data[i].position_y, "ausver-\nkauft").attr(
+                    {"font-family":"arial",
+                        "font-weight":"900",
+                        "font-size":"17",
+                        "text-align":"center",
+                        "fill":"#fff"}
+                );
+                circle.click(function () {
+                    //window.location = "http://dd.sesuso.de/order_tickets_workflow/receive_selected_table?selected_table_id=" + this.data("id");
+                    alert("Dieser Tisch ist ausverkauft. Bitte wählen Sie einen anderen Tisch.");
+                });
+            } else {
+                paper.text(x_offset + ball_table_data[i].position_x, y_offset + ball_table_data[i].position_y, "Plätze\nfrei").attr(
+                    {"font-family":"arial",
+                        "font-weight":"900",
+                        "font-size":"17",
+                        "text-align":"center",
+                        "fill":"#fff"}
+                );
+                circle.click(function () {
+                    //window.location = "http://dd.sesuso.de/order_tickets_workflow/receive_selected_table?selected_table_id=" + this.data("id");
+                    window.location = app_host + "/order_tickets_workflow/receive_selected_table?selected_table_id=" + this.data("id");
+                }); }
         }
     }
 
