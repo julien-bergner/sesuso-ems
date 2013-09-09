@@ -56,7 +56,9 @@ class OrderTicketsWorkflowController < ApplicationController
     extras.each do |extra|
 
       amount = params["input-amount-" + extra.id.to_s]
-      if amount == 0 then next end
+      if amount == 0 then
+        next
+      end
       OrderItem.create!(:order_id => session[:order_id], :product_id => extra.id, :quantity => amount)
 
     end
@@ -69,36 +71,38 @@ class OrderTicketsWorkflowController < ApplicationController
 
   end
 
-def receive_customer_data
-  @customer = Customer.new(params[:customer])
+  def receive_customer_data
+    @customer = Customer.new(params[:customer])
 
-  if @customer.save
-    order = Order.find(session[:order_id])
-    order.customer_id = @customer.id
-    order.save
+    if @customer.save
+      order = Order.find(session[:order_id])
+      order.customer_id = @customer.id
+      order.save
 
-    redirect_to :action => "show_summary"
+      redirect_to :action => "show_summary"
 
-  else
-    render action: "provide_customer_data"
+    else
+      render action: "provide_customer_data"
+
+    end
 
   end
 
-end
+  def show_summary
+    @order = Order.find(session[:order_id])
+    @customer = Customer.find(@order.customer.id)
+    @rows = @order.get_summary
 
-def show_summary
-  @order = Order.find(session[:order_id])
-  @customer = Customer.find(@order.customer.id)
-  @rows = @order.get_summary
+  end
 
-end
 
-def receive_confirmation
+  def show_bank_data
+    @order = Order.find(session[:order_id])
 
-end
+  end
 
-def show_bank_data
+  def receive_confirmation
 
-end
+  end
 
 end
