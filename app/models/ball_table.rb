@@ -5,7 +5,9 @@ class BallTable < ActiveRecord::Base
 
 
   def get_number_of_available_seats
-    self.seat.quantity - OrderItem.all.select{ |a| a.product_id == self.seat.id }.length
+    used_amount = 0
+    OrderItem.all.select{ |a| a.product.id == self.seat.id }.each{ |b| used_amount += b.quantity}
+    return self.seat.quantity - used_amount
   end
 
   def get_price_per_seat()
@@ -18,6 +20,8 @@ class BallTable < ActiveRecord::Base
     end
     return number
   end
+
+
 
 end
 
