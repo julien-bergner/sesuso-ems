@@ -30,20 +30,19 @@ class OrderTicketsWorkflowController < ApplicationController
   end
 
   def receive_selected_amount_of_seats
-    session[:selected_amount_of_seats] = params[:selected_amount_of_seats]
+    selected_table_id = session[:selected_table_id]
+    selected_amount_of_seats = params[:selected_amount_of_seats]
+
+    order = Order.create!()
+    product = Product.find_by_ball_table_id(selected_table_id)
+    OrderItem.create!(:order_id => order.id, :product_id => product.id, :quantity => selected_amount_of_seats)
+    session[:order_id] = order.id
+
     redirect_to :action => 'select_extras'
 
   end
 
   def select_extras
-    if session[:selected_table_id].nil?
-      redirect_to :action => 'start'
-    elsif session[:selected_amount_of_seats].nil?
-      redirect_to :action => "select_amount_of_seats"
-    else
-      @test1 = session[:selected_amount_of_seats]
-      @test2 = session[:selected_table_id]
-    end
 
     @food_category = Category.find_by_caption("Food")
     @extras = Product.find_all_by_category_id(@food_category.id)
@@ -51,6 +50,13 @@ class OrderTicketsWorkflowController < ApplicationController
   end
 
   def receive_selected_extras
+
+    food_category = Category.find_by_caption("Food")
+    extras = Product.find_all_by_category_id(food_category.id)
+    extras.each do |extra|
+      amount = params["input-amount-" + extra.id.to_s]
+      OrderItem.create!(:order_id => session[:order_id], :product_id => extra.id, :quantity => amount)
+    end
 
     redirect_to :action => "provide_customer_data"
   end
