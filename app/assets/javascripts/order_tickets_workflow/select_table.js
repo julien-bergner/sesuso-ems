@@ -44,6 +44,19 @@ function create_ball_tables(paper, ball_table_data) {
             var x_offset = second_floor_x_offset;
             var y_offset = second_floor_y_offset;
         }
+        var full_text = ball_table_data[i].caption + "\n(ausver-\nkauft)";
+        var empty_text = ball_table_data[i].caption + "\n(Plätze frei)";
+        var extra_text_offset = 0;
+        if(ball_table_data[i].caption == "Tisch 4") {
+            full_text = "T 4" + "\n(voll)";
+            empty_text = "T 4" + "\n(frei)";
+            extra_text_offset = -15;
+        }
+        if(ball_table_data[i].caption == "Tisch 19") {
+            full_text = "T 19" + "\n(voll)";
+            empty_text = "T 19" + "\n(frei)";
+            extra_text_offset = -15;
+        }
         if (ball_table_data[i].table_type == "rect") {
             var rect = paper.rect(x_offset + ball_table_data[i].position_x, y_offset + ball_table_data[i].position_y, ball_table_data[i].width, ball_table_data[i].height).attr({"stroke-width":standard_stroke_width, "fill":standard_stroke_color, "stroke":standard_stroke_color});
             if (ball_table_data[i].caption == "Tisch 4") {
@@ -51,7 +64,7 @@ function create_ball_tables(paper, ball_table_data) {
             }
             rect.data({"id": ball_table_data[i].id});
             if(ball_table_data[i].get_number_of_available_seats == 0) {
-                var caption = paper.text(x_offset + ball_table_data[i].position_x + 30, y_offset + ball_table_data[i].position_y + 30,  ball_table_data[i].caption + "\n(ausver-\nkauft)").attr(
+                var caption = paper.text(x_offset + ball_table_data[i].position_x + 30 + extra_text_offset, y_offset + ball_table_data[i].position_y + 30, full_text).attr(
                     {"font-family":"arial",
                         "font-weight":"700",
                         "font-size":"13",
@@ -62,7 +75,7 @@ function create_ball_tables(paper, ball_table_data) {
                 caption.click(empty_table_clicked);
                 rect.click(empty_table_clicked);
             } else {
-                var caption = paper.text(x_offset + ball_table_data[i].position_x + 38, y_offset + ball_table_data[i].position_y + 20, ball_table_data[i].caption + "\n(Plätze frei)").attr(
+                var caption = paper.text(x_offset + ball_table_data[i].position_x + 38 + extra_text_offset, y_offset + ball_table_data[i].position_y + 20, empty_text).attr(
                     {"font-family":"arial",
                         "font-weight":"700",
                         "font-size":"13",
@@ -78,7 +91,7 @@ function create_ball_tables(paper, ball_table_data) {
             var circle = paper.circle(x_offset + ball_table_data[i].position_x, y_offset + ball_table_data[i].position_y, ball_table_data[i].radius).attr({"stroke-width":standard_stroke_width, "fill":standard_stroke_color, "stroke":standard_stroke_color});
             circle.data({"id": ball_table_data[i].id});
             if(ball_table_data[i].get_number_of_available_seats == 0) {
-                var caption = paper.text(x_offset + ball_table_data[i].position_x, y_offset + ball_table_data[i].position_y, ball_table_data[i].caption + "\n(ausver-\nkauft)").attr(
+                var caption = paper.text(x_offset + ball_table_data[i].position_x, y_offset + ball_table_data[i].position_y, full_text).attr(
                     {"font-family":"arial",
                         "font-weight":"700",
                         "font-size":"13",
@@ -89,7 +102,7 @@ function create_ball_tables(paper, ball_table_data) {
                 caption.click(empty_table_clicked);
                 circle.click(empty_table_clicked);
             } else {
-                var caption = paper.text(x_offset + ball_table_data[i].position_x, y_offset + ball_table_data[i].position_y, ball_table_data[i].caption + "\n(Plätze frei)").attr(
+                var caption = paper.text(x_offset + ball_table_data[i].position_x, y_offset + ball_table_data[i].position_y, empty_text).attr(
                     {"font-family":"arial",
                         "font-weight":"700",
                         "font-size":"13",
