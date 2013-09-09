@@ -1,5 +1,5 @@
 
-<%= javascript_tag "var max_available_amount = #{@selected_table.seat.quantity}" %>
+<%= javascript_tag "var max_available_amount = #{@selected_table.get_number_of_available_seats}" %>
 <%= javascript_tag "var start_amount = #{1}" %>
 <%= javascript_include_tag "order_tickets_workflow/select_amount_of_seats" %>
 
