@@ -107,6 +107,8 @@ class OrderTicketsWorkflowController < ApplicationController
 
   def show_bank_data
     @order = Order.find(session[:order_id])
+    order_item = @order.order_items.select{|i| i.product.is_a?(Seat)}.first
+    @ballTable = BallTable.find(order_item.product.ball_table_id)
 
   end
 
