@@ -95,14 +95,21 @@ class OrderTicketsWorkflowController < ApplicationController
 
   end
 
+  def receive_confirmation
+    @order = Order.find(session[:order_id])
+    @order.order_status_id = 1
+    @order.save
+
+    redirect_to :action => "show_bank_data"
+
+  end
+
 
   def show_bank_data
     @order = Order.find(session[:order_id])
 
   end
 
-  def receive_confirmation
 
-  end
 
 end

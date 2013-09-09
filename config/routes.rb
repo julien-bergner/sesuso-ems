@@ -22,6 +22,10 @@ SesusoEms::Application.routes.draw do
   get 'order_tickets_workflow/provide_customer_data', to: 'order_tickets_workflow#provide_customer_data'
   post 'order_tickets_workflow/receive_customer_data', to: 'order_tickets_workflow#receive_customer_data'
   get 'order_tickets_workflow/show_summary', to: 'order_tickets_workflow#show_summary'
+  get 'order_tickets_workflow/receive_confirmation', to: 'order_tickets_workflow#receive_confirmation'
+  get 'order_tickets_workflow/show_bank_data', to: 'order_tickets_workflow#show_bank_data'
+
+
 
   devise_for :users
   resources :users
