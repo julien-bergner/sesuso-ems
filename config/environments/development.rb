@@ -34,4 +34,14 @@ SesusoEms::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+      address:              Figaro.env.MAIL_SMTP_ADDRESS,
+      port:                 Figaro.env.MAIL_PORT,
+      domain:               Figaro.env.MAIL_DOMAIN,
+      user_name:            Figaro.env.MAIL_USER_NAME,
+      password:             Figaro.env.MAIL_PASSWORD,
+      authentication:       'plain',
+      enable_starttls_auto: true  }
 end
