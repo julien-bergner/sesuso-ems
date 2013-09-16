@@ -56,7 +56,8 @@ class OrderTicketsWorkflowController < ApplicationController
     extras.each do |extra|
 
       amount = params["input-amount-" + extra.id.to_s]
-      unless amount == 0 then
+
+      unless amount.to_i == 0 then
         OrderItem.create!(:order_id => session[:order_id], :product_id => extra.id, :quantity => amount)
       end
 
