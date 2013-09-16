@@ -100,6 +100,8 @@ class OrderTicketsWorkflowController < ApplicationController
     @order.order_status_id = 1
     @order.save
 
+    @order.send_confirmation_mail
+
     redirect_to :action => "show_bank_data"
 
   end
