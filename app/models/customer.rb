@@ -4,4 +4,8 @@ class Customer < ActiveRecord::Base
   validates_format_of :email, :with => /(^$|^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$)/i, :message => "Bitte geben Sie eine g&uuml;ltige E-Mail-Adresse ein."
   has_many :orders
 
+  def name
+    "#{self.first_name} #{self.last_name}"
+  end
+
 end

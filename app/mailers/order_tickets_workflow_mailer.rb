@@ -1,10 +1,14 @@
 class OrderTicketsWorkflowMailer < ActionMailer::Base
   default from: "from@example.com"
 
-  def welcome_email(user)
-    @user = user
-    email_with_name = "#{@user.name} <#{@user.email}>"
-    mail(to: email_with_name, subject: 'Welcome to My Awesome Site')
+  def confirmation_email(order)
+    @order = order
+    @customer = @order.customer
+
+    @rows = @order.get_summary
+
+    email_with_name = "#{@customer.name} <#{@customer.email}>"
+    mail(to: email_with_name, subject: 'Subject')
   end
 
 end
