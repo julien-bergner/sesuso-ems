@@ -47,6 +47,6 @@ class Order < ActiveRecord::Base
   end
 
   def send_confirmation_mail
-    OrderTicketsWorkflowMailer.confirmation_email(self).deliver!
+    OrderTicketsWorkflowMailer.confirmation_mail(self).deliver!
   end
 end
