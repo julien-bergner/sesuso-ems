@@ -81,4 +81,9 @@ class OrdersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def send_confirmation_mail
+    @order = Order.find(params[:id])
+    @order.send_confirmation_mail
+  end
 end

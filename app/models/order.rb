@@ -25,6 +25,26 @@ class Order < ActiveRecord::Base
     return rows
   end
 
+  def get_short_summary
+
+    rows = Array.new
+
+    self.order_items.each do |order_item|
+      row = Array.new
+      row.push(order_item.quantity.to_s + "x")
+      if order_item.product.is_a?(Seat)
+        ballTable = BallTable.find(order_item.product.ball_table_id)
+        row.push(order_item.product.caption + " an " + ballTable.caption)
+      else
+        row.push(order_item.product.caption)
+      end
+
+      rows.push(row)
+    end
+
+    return rows
+  end
+
   def get_overall_amount
     self.overall_amount = 0
 
