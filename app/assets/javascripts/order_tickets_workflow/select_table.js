@@ -89,7 +89,7 @@ function make_label(paper, form, ball_table_data_set) {
     if(ball_table_data_set.caption == "Tisch 4") {
         var base_text  = "Tisch\n4 ";
         var empty_text =  "(frei)";
-        var full_text = "\n(voll)";
+        var full_text = "(voll)";
      } else if(ball_table_data_set.caption == "Tisch 19") {
         var base_text  = "Tisch\n19";
         var empty_text =  "\n(frei)";
