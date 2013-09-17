@@ -8,6 +8,10 @@ var first_floor_y_offset = 50;
 var second_floor_x_offset = 430;
 var second_floor_y_offset = 50;
 
+// Standard texts
+var standard_full_text =  "\n(ausver-\nkauft)";
+var standard_empty_text = "\n(Plätze frei)";
+
 window.onload = function () {
 
     $.getJSON(app_host + "/order_tickets_workflow/get_ball_tables",
@@ -44,86 +48,106 @@ function create_ball_tables(paper, ball_table_data) {
             var x_offset = second_floor_x_offset;
             var y_offset = second_floor_y_offset;
         }
-        var full_text = ball_table_data[i].caption + "\n(ausver-\nkauft)";
-        var empty_text = ball_table_data[i].caption + "\n(Plätze frei)";
-        var extra_text_offset = 0;
-        if(ball_table_data[i].caption == "Tisch 4") {
-            full_text = "T 4" + "\n(voll)";
-            empty_text = "T 4" + "\n(frei)";
-            extra_text_offset = -15;
-        }
-        if(ball_table_data[i].caption == "Tisch 19") {
-            full_text = "T 19" + "\n(voll)";
-            empty_text = "T 19" + "\n(frei)";
-            extra_text_offset = -15;
-        }
-        if (ball_table_data[i].table_type == "rect") {
-            var rect = paper.rect(x_offset + ball_table_data[i].position_x, y_offset + ball_table_data[i].position_y, ball_table_data[i].width, ball_table_data[i].height).attr({"stroke-width":standard_stroke_width, "fill":standard_stroke_color, "stroke":standard_stroke_color});
-            if (ball_table_data[i].caption == "Tisch 4") {
-                rect.rotate(-34);
-            }
-            rect.data({"id": ball_table_data[i].id});
-            if(ball_table_data[i].get_number_of_available_seats <= 0) {
-                var caption = paper.text(x_offset + ball_table_data[i].position_x + 30 + extra_text_offset, y_offset + ball_table_data[i].position_y + 30, full_text).attr(
-                    {"font-family":"arial",
-                        "font-weight":"700",
-                        "font-size":"13",
-                        "text-align":"center",
-                        "fill":"#fff"}
-                );
-                caption.data({"id": ball_table_data[i].id});
-                caption.click(empty_table_clicked);
-                rect.click(empty_table_clicked);
-            } else {
-                var caption = paper.text(x_offset + ball_table_data[i].position_x + 38 + extra_text_offset, y_offset + ball_table_data[i].position_y + 20, empty_text).attr(
-                    {"font-family":"arial",
-                        "font-weight":"700",
-                        "font-size":"13",
-                        "text-align":"center",
-                        "fill":"#fff"}
-                );
-                caption.data({"id": ball_table_data[i].id});
-                caption.click(full_table_clicked);
-            rect.click(full_table_clicked); }
-            ball_tables.push(rect);
-        } else if (ball_table_data[i].table_type == "circle") {
 
-            var circle = paper.circle(x_offset + ball_table_data[i].position_x, y_offset + ball_table_data[i].position_y, ball_table_data[i].radius).attr({"stroke-width":standard_stroke_width, "fill":standard_stroke_color, "stroke":standard_stroke_color});
-            circle.data({"id": ball_table_data[i].id});
-            if(ball_table_data[i].get_number_of_available_seats <= 0) {
-                var caption = paper.text(x_offset + ball_table_data[i].position_x, y_offset + ball_table_data[i].position_y, full_text).attr(
-                    {"font-family":"arial",
-                        "font-weight":"700",
-                        "font-size":"13",
-                        "text-align":"center",
-                        "fill":"#fff"}
-                );
-                caption.data({"id": ball_table_data[i].id});
-                caption.click(empty_table_clicked);
-                circle.click(empty_table_clicked);
-            } else {
-                var caption = paper.text(x_offset + ball_table_data[i].position_x, y_offset + ball_table_data[i].position_y, empty_text).attr(
-                    {"font-family":"arial",
-                        "font-weight":"700",
-                        "font-size":"13",
-                        "text-align":"center",
-                        "fill":"#fff"}
-                );
-                caption.data({"id": ball_table_data[i].id});
-                caption.click(full_table_clicked);
-                circle.click(full_table_clicked); }
-        }
+        var form = make_table(paper, ball_table_data[i], x_offset, y_offset);
+        var caption = make_label(paper, form, ball_table_data[i]);
     }
 
     return ball_tables;
 }
 
-empty_table_clicked = function () {
+function make_table(paper, ball_table_data_set, x_offset,y_offset) {
+    if (ball_table_data_set.table_type == "rect") {
+        var form = paper.rect(x_offset + ball_table_data_set.position_x, y_offset + ball_table_data_set.position_y,
+            ball_table_data_set.width, ball_table_data_set.height);
+        if (ball_table_data_set.caption == "Tisch 4") {
+            form.rotate(-34);
+        }
+        form.data({"id": ball_table_data_set.id});
+
+    } else if (ball_table_data_set.table_type == "circle") {
+
+        var form = paper.circle(x_offset + ball_table_data_set.position_x, y_offset + ball_table_data_set.position_y,
+            ball_table_data_set.radius);
+        form.data({"id": ball_table_data_set.id});
+
+    }
+
+
+    if (ball_table_data_set.get_number_of_available_seats > 0) {
+        form.attr({"stroke-width":standard_stroke_width,
+            "fill":standard_stroke_color, "stroke":standard_stroke_color});
+    } else {
+        form.attr({"stroke-width":standard_stroke_width,
+            "fill": "#fff", "stroke":standard_stroke_color});
+    }
+    return form;
+}
+
+function make_label(paper, form, ball_table_data_set) {
+
+    if(ball_table_data_set.caption == "Tisch 4") {
+        var base_text  = "Tisch\n4";
+        var empty_text =  "\n(frei)";
+        var full_text = "\n(voll)";
+     } else if(ball_table_data_set.caption == "Tisch 19") {
+        var base_text  = "Tisch\n19";
+        var empty_text =  "\n(frei)";
+        var full_text = "\n(voll)";
+    } else {
+        var base_text  = ball_table_data_set.caption;
+        var empty_text = "\n(" + ball_table_data_set.get_number_of_available_seats + " Plätze\nfrei)";
+        var full_text = standard_full_text;
+    }
+
+    if (ball_table_data_set.get_number_of_available_seats > 0) {
+
+        var caption = get_new_label(paper, get_center_x(form), get_center_y(form), base_text + empty_text,
+            ball_table_data_set.id, "#fff", empty_click_function);
+        form.click(empty_click_function);
+    } else {
+        var caption = get_new_label(paper, get_center_x(form), get_center_y(form), base_text + full_text,
+            ball_table_data_set.id, standard_stroke_color, full_click_function);
+        form.click(full_click_function);
+    }
+    return caption;
+}
+
+function get_new_label(paper, x_position, y_position, text, id, color, click_function) {
+    var caption = paper.text(x_position, y_position, text).attr(
+        {"font-family":"arial",
+            "font-weight":"700",
+            "font-size":"13",
+            "text-align":"center",
+            "fill": color}
+    );
+    caption.data({"id": id});
+    caption.click(click_function);
+    return caption;
+}
+
+function get_center_x(form) {
+    if (form.type == "circle") {
+        return form.attr('cx');
+    } else if (form.type == "rect") {
+        return (form.attr('x') + (form.attr('width') / 2));
+    }
+}
+
+function get_center_y(form) {
+    if (form.type == "circle") {
+        return form.attr('cy');
+    } else if (form.type == "rect") {
+        return (form.attr('y') + (form.attr('height') / 2));
+    }
+}
+
+full_click_function = function () {
 
     alert("Dieser Tisch ist ausverkauft. Bitte wählen Sie einen anderen Tisch.");
 }
 
-full_table_clicked = function () {
+empty_click_function = function () {
     window.location = app_host + "/order_tickets_workflow/receive_selected_table?selected_table_id=" + this.data("id");
 }
 
