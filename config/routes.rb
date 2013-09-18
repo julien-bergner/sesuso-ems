@@ -30,8 +30,12 @@ SesusoEms::Application.routes.draw do
   # Back end
   get 'back_end/overview', to: 'back_end#overview'
 
+  match 'back_end/overview' => 'back_end#overview', :as => :overview
+
   # Orders
   get 'orders/send_confirmation_mail', to: 'orders#send_confirmation_mail'
+
+
 
 
   devise_for :users, :path => '', :path_names => {:sign_in => 'login', :sign_out => 'logout'}
