@@ -50,7 +50,7 @@ de:
       destroy_user: "Benutzer löschen"
       new_user: "Neuen Benutzer anlegen"
 
-   date:
+  date:
     abbr_day_names:
     - So
     - Mo
