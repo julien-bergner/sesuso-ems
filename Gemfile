@@ -18,7 +18,8 @@ gem 'rolify'
 gem 'simple_form'
 gem 'uberspacify'
 gem 'figaro'
-
+gem 'wkhtmltopdf-binary'
+gem 'wicked_pdf'
 
 group :development do
   gem 'better_errors'
