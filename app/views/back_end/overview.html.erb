@@ -13,14 +13,14 @@
   <% @customers.each do |customer| %>
       <% orders = customer.orders %>
       <tr>
-        <td><%= "#{customer.salutation} #{customer.name}" %></td>
+        <td><%= "#{customer.salutation} #{customer.name}<br>#{customer.street_name} #{customer.street_number}<br>#{customer.zip_code} #{customer.city}".html_safe %></td>
         <td><%= mail_to customer.email %></td>
         <td>
           <table class="table table-bordered">
 
             <% orders.each do |order| %>
                 <% rows = order.get_short_summary %>
-                <tr style="background-color:#FFFFE0;">
+                <tr>
                  <td>
                   <table class="table">
                   <% rows.each do |row| %>
@@ -41,7 +41,7 @@
                     <ul>
                       <li>Bestellung wurde angelegt am <%= order.created_at.in_time_zone("Berlin").to_s(:european_style) %>.</li>
                       <%= if order.order_status_id == "1" then "<li>Bestellung wurde aktiv.</li>".html_safe end %>
-                      <%= link_to "Bestellbestätigung verschicken" , url_for(:controller => "orders", :action => "send_confirmation_mail", :id => order.id) %>
+                      <%= if current_user.has_role? :admin then link_to "Bestellbestätigung verschicken" , url_for(:controller => "orders", :action => "send_confirmation_mail", :id => order.id) end %>
 
                     </ul>
 
@@ -52,7 +52,7 @@
           </table>
         </td>
 
-        <td>Button</td>
+
       </tr>
   <% end %>
 </table>
