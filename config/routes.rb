@@ -34,7 +34,7 @@ SesusoEms::Application.routes.draw do
   get 'orders/send_confirmation_mail', to: 'orders#send_confirmation_mail'
 
 
+  devise_for :users, :path => '', :path_names => {:sign_in => 'login', :sign_out => 'logout'}
 
-  devise_for :users
   resources :users
 end
