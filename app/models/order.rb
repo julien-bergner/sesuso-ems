@@ -69,4 +69,23 @@ class Order < ActiveRecord::Base
   def send_confirmation_mail
     OrderTicketsWorkflowMailer.confirmation_mail(self).deliver!
   end
+
+  def cancel
+    self.customer.destroy
+    self.order_items.each { |i| i.destroy }
+    self.destroy
+  end
+
+  def self.clean_up
+    Order.where(
+        'created_at >= :fifteen_minutes_ago',
+        :fifteen_minutes_ago => Time.current - 15.minutes
+    ).each do |order|
+      if order.order_status_id.nil?
+        order.cancel
+
+      end
+    end
+
+  end
 end
