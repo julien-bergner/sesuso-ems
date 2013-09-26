@@ -20,6 +20,7 @@ gem 'uberspacify'
 gem 'figaro'
 gem 'wkhtmltopdf-binary'
 gem 'wicked_pdf'
+gem 'whenever'
 
 group :development do
   gem 'better_errors'
