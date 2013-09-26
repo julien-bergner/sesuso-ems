@@ -77,7 +77,7 @@ class Order < ActiveRecord::Base
   end
 
   def self.clean_up
-    Order.where("created_at > ?", DateTime.current - 15.minutes)
+    Order.where("created_at < ?", DateTime.current - 15.minutes)
     .select{|o| o.order_status_id.nil?}.each{|o| o.cancel}
   end
 end
