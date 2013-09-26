@@ -77,15 +77,7 @@ class Order < ActiveRecord::Base
   end
 
   def self.clean_up
-    Order.where(
-        'created_at >= :fifteen_minutes_ago',
-        :fifteen_minutes_ago => Time.current - 15.minutes
-    ).each do |order|
-      if order.order_status_id.nil?
-        order.cancel
-
-      end
-    end
-
+    Order.where("created_at > ?", DateTime.current - 15.minutes)
+    .select{|o| o.order_status_id.nil?}.each{|o| o.cancel}
   end
 end
