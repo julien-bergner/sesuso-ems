@@ -71,13 +71,37 @@ class Order < ActiveRecord::Base
   end
 
   def cancel
-    unless self.customer.nil? then self.customer.destroy end
-    self.order_items.each { |i| i.destroy }
+
+    unless self.customer.nil? then
+      puts "Customer deleted:"
+      puts customer.inspect
+      logger.info("Customer deleted:")
+      logger.info(customer.inspect)
+      self.customer.destroy
+    end
+
+    puts "Order Items deleted:"
+    logger.info("Order Items deleted:")
+    self.order_items.each do |i|
+      puts i.inspect
+      logger.info(i.inspect)
+      i.destroy
+    end
+
+    puts "Order deleted:"
+    puts self.inspect
+    logger.info("Order deleted:")
+    logger.info(self.inspect)
     self.destroy
   end
 
   def self.clean_up
+    puts "Orders clean up started:"
+    logger.info("Orders clean up started:")
     Order.where("created_at < ?", DateTime.current - 15.minutes)
     .select{|o| o.order_status_id.nil?}.each{|o| o.cancel}
+    puts "Orders clean up finished."
+    logger.info("Orders clean up finished.")
   end
+
 end
