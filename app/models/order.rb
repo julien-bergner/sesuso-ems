@@ -71,7 +71,7 @@ class Order < ActiveRecord::Base
   end
 
   def cancel
-    self.customer.destroy
+    unless self.customer.nil? then self.customer.destroy end
     self.order_items.each { |i| i.destroy }
     self.destroy
   end
