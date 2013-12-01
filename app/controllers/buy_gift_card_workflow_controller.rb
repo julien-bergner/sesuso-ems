@@ -1,0 +1,2 @@
+class BuyGiftCardWorkflowController < ApplicationController
+end
