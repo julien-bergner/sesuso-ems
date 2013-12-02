@@ -10,7 +10,7 @@ SesusoEms::Application.routes.draw do
   end
   root :to => 'buy_gift_card_workflow#instructions'
 
-  get ':controller/:action'
+  #get ':controller/:action'
 
   # Order Ticket Workflow
   get 'order_tickets_workflow/start', to: 'order_tickets_workflow#start'
