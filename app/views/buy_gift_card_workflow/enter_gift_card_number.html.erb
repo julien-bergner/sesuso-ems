@@ -1,0 +1,6 @@
+<h3>Bitte geben Sie die Nummer <br/> auf Ihrem Gutschein ein:</h3>
+
+<%= simple_form_for :gift_card, { url: url_for(:controller => "buy_gift_card_workflow", :action => "receive_gift_card_number")} do |f| %>
+    <%= f.input :number, :label => false%>
+    <%= f.button :submit, "Weiter", :class => 'btn btn-warning' %>
+<% end %>

@@ -8,9 +8,9 @@ SesusoEms::Application.routes.draw do
   authenticated :user do
     root :to => 'home#index'
   end
-  root :to => 'order_tickets_workflow#start'
+  root :to => 'buy_gift_card_workflow#instructions'
 
-  #get ':controller/:action'
+  get ':controller/:action'
 
   # Order Ticket Workflow
   get 'order_tickets_workflow/start', to: 'order_tickets_workflow#start'
@@ -26,6 +26,10 @@ SesusoEms::Application.routes.draw do
   get 'order_tickets_workflow/show_summary', to: 'order_tickets_workflow#show_summary'
   get 'order_tickets_workflow/receive_confirmation', to: 'order_tickets_workflow#receive_confirmation'
   get 'order_tickets_workflow/show_bank_data', to: 'order_tickets_workflow#show_bank_data'
+
+  # Buy gift card workflow
+  post 'buy_gift_card_workflow/receive_gift_card_number', to: 'buy_gift_card_workflow#receive_gift_card_number'
+  post 'buy_gift_card_workflow/receive_amount', to: 'buy_gift_card_workflow#receive_amount'
 
   # Back end
   get 'back_end/overview', to: 'back_end#overview'
