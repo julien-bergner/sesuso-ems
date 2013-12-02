@@ -1,6 +1,0 @@
-<h3>Welchen Betrag möchten Sie aufladen?</h3>
-
-<%= simple_form_for :gift_card, { url: url_for(:controller => "buy_gift_card_workflow", :action => "receive_amount")} do |f| %>
-    <%= f.input :number, :label => false%>
-    <%= f.button :submit, "Weiter", :class => 'btn btn-warning' %>
-<% end %>

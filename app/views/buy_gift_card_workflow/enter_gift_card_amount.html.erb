@@ -1,0 +1,16 @@
+<div class="rounded-corner-square-370">
+
+  <div class="inner-rounded-corner-square-container">
+
+    <h3>Welchen Betrag möchten <br/> Sie aufladen?</h3>
+
+    <%= simple_form_for :gift_card, {url: url_for(:controller => "buy_gift_card_workflow", :action => "receive_amount")} do |f| %>
+        <%= f.input :number, :label => false, :input_html => {:maxlength => "30", :class => "input-field"} %>
+        <%= f.button :submit, "Weiter", :class => 'btn btn-warning btn-block' %>
+    <% end %>
+
+  </div>
+
+</div>
+
+
