@@ -3,6 +3,29 @@ class Order < ActiveRecord::Base
   has_many :order_items
   belongs_to :customer
 
+  def paypal_url(return_url)
+
+    values = {
+        :business => Figaro.env.paypal_business_email,
+        :cmd => '_cart',
+        :upload => 1,
+        :return => return_url,
+        :invoice => id
+    }
+
+    self.order_items.each_with_index do |order_item, index|
+      values.merge!({
+                        "amount_#{index+1}" => order_item.product.price,
+                        "item_name_#{index+1}" => order_item.product.caption,
+                        # "item_number_#{index+1}" => @order.id,
+                        "quantity_#{index+1}" => order_item.quantity
+
+                    })
+    end
+    values.merge! ({"currency_code" => "EUR"})
+    return "https://www.paypal.com/cgi-bin/webscr?" + values.to_query
+  end
+
   def get_summary
 
     rows = Array.new
