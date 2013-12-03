@@ -1,17 +1,16 @@
-<div class="rounded-corner-square-370">
+<% content_for :width_container do %>
+    <div class="max-width-370">
+<% end %>
 
-  <div class="inner-rounded-corner-square-container">
 
-    <h3>Welchen Betrag möchten <br/> Sie aufladen?</h3>
 
-    <%= simple_form_for :gift_card, {url: url_for(:controller => "buy_gift_card_workflow", :action => "receive_amount")} do |f| %>
-        <%= f.input :amount, :label => false, :input_html => {:maxlength => "7", :class => "input-field"} %>
-        <%=  f.hidden_field :product_id, :value => @product_id %>
-        <%= f.button :submit, "Weiter", :class => 'btn btn-warning btn-block' %>
-    <% end %>
+<h3>Welchen Betrag möchten <br/> Sie aufladen?</h3>
 
-  </div>
+<%= simple_form_for :gift_card, {url: url_for(:controller => "buy_gift_card_workflow", :action => "receive_amount")} do |f| %>
+    <%= f.input :amount, :label => false, :input_html => {:maxlength => "7", :class => "input-field"} %>
+    <%= f.hidden_field :product_id, :value => @product_id %>
+    <%= f.button :submit, "Weiter", :class => 'btn btn-warning btn-block' %>
+<% end %>
 
-</div>
 
 

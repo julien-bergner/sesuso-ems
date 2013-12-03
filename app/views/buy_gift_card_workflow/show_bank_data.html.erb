@@ -1,21 +1,19 @@
-<div class="rounded-corner-square-700">
+<% content_for :width_container do %>
+    <div class="max-width-700">
+<% end %>
 
-  <div class="inner-rounded-corner-square-container">
+<h3>Vielen Dank für Ihre Gutscheinbestellung.<br>
+  Wir senden Ihnen eine Bestellbestätigung per E-Mail zu.</h3>
 
-    <h3>Vielen Dank für Ihre Gutscheinbestellung.<br>
-      Wir senden Ihnen eine Bestellbestätigung per E-Mail zu.</h3>
+<hr class="thick-green-hr">
 
-    <hr class="thick-green-hr">
+<h3>Bitte überweisen Sie <%= @order.overall_amount %> &euro; auf folgendes Konto:</h3>
 
-    <h3>Bitte überweisen Sie <%= @order.overall_amount %> &euro; auf folgendes Konto:</h3>
+<h3>Kontoinhaber: Debbie und Oliver Seefeld<br>
+  Kontonummer: 061 539 4629<br>
+  Bankleitzahl: 100 208 90 (HypoVereinsbank)</h3>
+<br>
 
-    <h3>Kontoinhaber: Debbie und Oliver Seefeld<br>
-      Kontonummer: 061 539 4629<br>
-      Bankleitzahl: 100 208 90 (HypoVereinsbank)</h3>
-    <br>
+<h3>Ihr Gutschein wird aktiviert, sobald die Zahlung eingegangen ist.</h3>
 
-    <h3>Ihr Gutschein wird aktiviert, sobald die Zahlung eingegangen ist.</h3>
 
-  </div>
-
-</div>

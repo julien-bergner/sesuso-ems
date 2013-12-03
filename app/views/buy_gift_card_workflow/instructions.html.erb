@@ -1,16 +1,14 @@
-<div class="rounded-corner-square-500">
+<% content_for :width_container do %>
+    <div class="max-width-500">
+<% end %>
 
-  <div class="inner-rounded-corner-square-container">
 
 <h1>So funktioniert es:</h1>
 
-  <h4>1. Gutscheinnummer eingeben</h4>
-  <h4>2. Gewünschten Betrag aufladen</h4>
-  <h4>3. Gutschein verschenken</h4>
+<h4>1. Gutscheinnummer eingeben</h4>
+<h4>2. Gewünschten Betrag aufladen</h4>
+<h4>3. Gutschein verschenken</h4>
 
 
 <%= link_to("Los", url_for(:controller => "buy_gift_card_workflow", :action => "enter_gift_card_number"), {:class => "btn btn-warning", :style => "width: 75%;"}) %>
 
-  </div>
-
-</div>

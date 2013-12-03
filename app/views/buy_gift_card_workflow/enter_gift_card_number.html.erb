@@ -1,14 +1,11 @@
-<div class="rounded-corner-square-500">
+<% content_for :width_container do %>
+    <div class="max-width-500">
+<% end %>
 
-  <div class="inner-rounded-corner-square-container">
+<h3>Bitte geben Sie die Nummer <br/> auf Ihrem Gutschein ein:</h3>
 
-    <h3>Bitte geben Sie die Nummer <br/> auf Ihrem Gutschein ein:</h3>
+<%= simple_form_for :gift_card, {url: url_for(:controller => "buy_gift_card_workflow", :action => "receive_gift_card_number")} do |f| %>
+    <%= f.input :number, :label => false, :input_html => {:maxlength => "30", :class => "input-field"} %>
+    <%= f.button :submit, "Weiter", :class => 'btn btn-warning btn-block' %>
+<% end %>
 
-    <%= simple_form_for :gift_card, {url: url_for(:controller => "buy_gift_card_workflow", :action => "receive_gift_card_number")} do |f| %>
-        <%= f.input :number, :label => false, :input_html => { :maxlength => "30", :class => "input-field" }  %>
-        <%= f.button :submit, "Weiter", :class => 'btn btn-warning btn-block' %>
-    <% end %>
-
-  </div>
-
-</div>

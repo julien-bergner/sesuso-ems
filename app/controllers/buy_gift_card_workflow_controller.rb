@@ -1,4 +1,5 @@
 class BuyGiftCardWorkflowController < ApplicationController
+  layout "order_gift_card_workflow_layout"
 
   def start
     redirect_to :action => 'instructions'
