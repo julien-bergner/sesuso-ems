@@ -5,13 +5,15 @@
     <h3>Wie möchten Sie bezahlen?</h3>
 
     <div id="payment-container">
-      <h3>a) Zahlen mit <%= link_to(image_tag("paypal.gif", :border => 0), "#") %> </h3>
+      <h3>a) Zahlen mit <%= link_to(image_tag("paypal.gif", :border => 0), url_for(:controller => "buy_gift_card_workflow", :action => "receive_payment_method", :payment_method => "paypal", :order_id => @order_id)) %> </h3>
       <h4>(Gutscheinkarte wird innerhalb von 24h aktiviert.)</h4>
       <hr class="thick-green-hr">
-      <h3>b) Zahlen per &nbsp; <%= link_to "klassischer Banküberweisung", "#", {:class => 'btn btn-warning', :id => "bank-transfer-button"} %></h3>
+      <h3>b) Zahlen per &nbsp; <%= link_to "klassischer Banküberweisung", url_for(:controller => "buy_gift_card_workflow", :action => "receive_payment_method", :payment_method => "bank_transfer", :order_id => @order_id), {:class => 'btn btn-warning', :id => "bank-transfer-button"} %></h3>
       <h4>(Gutscheinkarte wird nach Geldeingang aktiviert.)</h4>
     </div>
 
   </div>
 
 </div>
+
+
