@@ -1,4 +1,4 @@
-class BuyGiftCardWorkflowController < ApplicationController
+class OrderGiftCardWorkflowController < ApplicationController
   layout "order_gift_card_workflow_layout"
 
   def start
