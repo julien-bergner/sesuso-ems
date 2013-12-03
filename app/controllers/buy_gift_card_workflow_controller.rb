@@ -31,16 +31,29 @@ class BuyGiftCardWorkflowController < ApplicationController
   end
 
   def receive_amount
+
     product = Product.find(params[:gift_card][:product_id])
-    amount = params[:gift_card][:number]
-    product.price = amount
-    product.save
+    amount = params[:gift_card][:amount]
 
-    order = Order.create!(:overall_amount => product.price)
+    if product.nil?
+      redirect_to :action => "enter_gift_card_number"
+    elsif amount.empty?
+      flash[:error] = 'Bitte geben Sie einen Betrag ein.'.html_safe
+      redirect_to :action => "enter_gift_card_amount", :product_id => product.id
+    elsif not amount =~ /(^[0-9]*[.,][0-9]{2}$)|(^[0-9]*$)/
+      flash[:error] = 'Bitte geben Sie einen Betrag in einem Format wie 20 oder 20,50 ein.'.html_safe
+      redirect_to :action => "enter_gift_card_amount", :product_id => product.id
+    else
+      product.price = amount.gsub(',', '.')
+      product.save
 
-    OrderItem.create!(:order_id => order.id, :product_id => product.id, :quantity => 1)
+      order = Order.create!(:overall_amount => product.price)
 
-    redirect_to :action => "select_payment_method", :order_id => order.id
+      OrderItem.create!(:order_id => order.id, :product_id => product.id, :quantity => 1)
+
+      redirect_to :action => "select_payment_method", :order_id => order.id
+    end
+
   end
 
   def select_payment_method
