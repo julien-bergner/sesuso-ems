@@ -11,7 +11,7 @@ class OrderGiftCardWorkflowMailer < ActionMailer::Base
     mail(to: email_with_name, subject: 'Subject')
   end
 
-  def confirmation_mail_for_bank_paypal_payment
+  def confirmation_mail_for_paypal_payment
     @order = order
     @customer = @order.customer
 
