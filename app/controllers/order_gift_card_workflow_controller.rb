@@ -52,8 +52,48 @@ class OrderGiftCardWorkflowController < ApplicationController
 
       OrderItem.create!(:order_id => order.id, :product_id => product.id, :quantity => 1)
 
-      redirect_to :action => "select_payment_method", :order_id => order.id
+      redirect_to :action => "provide_customer_data", :order_id => order.id
     end
+
+  end
+
+  def provide_customer_data
+    @customer = Customer.new
+    order_id = params[:order_id]
+    render action: "provide_customer_data", :locals => { :order_id => order_id }
+
+  end
+
+  def receive_customer_data
+    order = Order.find(params[:customer].delete("order_id"))
+    @customer = Customer.new(params[:customer])
+
+    if @customer.save
+      order.customer_id = @customer.id
+      order.save
+
+      redirect_to :action => "show_summary", :order_id => order.id
+
+    else
+      render action: "provide_customer_data", :locals => { :order_id => order.id }
+
+    end
+
+  end
+
+  def show_summary
+    @order = Order.find(params[:order_id])
+    @customer = Customer.find(@order.customer.id)
+    @rows = @order.get_summary
+
+  end
+
+  def receive_confirmation
+    order = Order.find(params[:order_id])
+    order.order_status_id = 1
+    order.save
+
+    redirect_to :action => "select_payment_method", :order_id => order.id
 
   end
 

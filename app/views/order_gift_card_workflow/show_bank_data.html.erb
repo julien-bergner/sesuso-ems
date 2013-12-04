@@ -1,5 +1,5 @@
 <% content_for :width_container do %>
-    <div class="max-width-700">
+    <div class="max-width-750">
 <% end %>
 
 <h3>Vielen Dank für Ihre Gutscheinbestellung.<br>
@@ -7,7 +7,7 @@
 
 <hr class="thick-green-hr">
 
-<h3>Bitte überweisen Sie <%= @order.overall_amount %> &euro; auf folgendes Konto:</h3>
+<h3>Bitte überweisen Sie <%= number_to_currency(@order.overall_amount, unit: "&euro;", separator: ",", delimiter: "", format: "%n %u") %> auf folgendes Konto:</h3>
 
 <h3>Kontoinhaber: Debbie und Oliver Seefeld<br>
   Kontonummer: 061 539 4629<br>

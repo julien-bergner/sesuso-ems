@@ -1,0 +1,32 @@
+<% content_for :width_container do %>
+    <div class="max-width-500">
+<% end %>
+
+<h3>Bitte geben Sie Ihre Daten ein:</h3>
+
+<div id="customer-form-container">
+  <%= simple_form_for(@customer, :url => url_for(:controller => "order_gift_card_workflow", :action => "receive_customer_data"), :method => :post, :html => {:class => 'form-horizontal' }) do |f| %>
+
+      <%= f.input :salutation, label: "Anrede" %>
+      <%= f.input :first_name, label: "Vorname" %>
+      <%= f.input :last_name, label: "Nachname" %>
+      <%= f.input :street_name, label: "Straße" %>
+      <%= f.input :street_number, label: "Nr." %>
+      <%= f.input :zip_code, label: "PLZ" %>
+      <%= f.input :city, label: "Ort" %>
+      <%= f.input :email, label: "E-Mail" %>
+      <%= f.hidden_field :order_id, :value => order_id %>
+
+       <!-- <%= link_to "Zurück", url_for(:controller => "order_gift_card_workflow", :action => "enter_gift_card_amount"), :class => 'btn' %>  -->
+        <%= f.button :submit, "Weiter", :class => 'btn btn-warning btn-block' %>
+
+
+  <% end %>
+
+
+
+
+
+
+
+</div>

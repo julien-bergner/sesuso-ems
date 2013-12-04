@@ -1,0 +1,45 @@
+<% content_for :width_container do %>
+    <div class="max-width-500">
+<% end %>
+
+<h3>Zusammenfassung</h3>
+
+<table class="table table-striped">
+
+  <% @rows.each do |row| %>
+      <tr>
+        <% row.each do |field| %>
+            <td><h4><%= field.to_s %></h4></td>
+        <% end %>
+      </tr>
+  <% end %>
+
+</table>
+<h3>Gesamtpreis: <%= number_to_currency(@order.overall_amount, unit: "&euro;", separator: ",", delimiter: "", format: "%n %u") %></h3>
+
+<hr class="thick-green-hr">
+
+<h3>Kontaktdaten</h3>
+
+<div class="center-content">
+
+<table>
+  <tr><td><h4>Anrede:</h4></td><td>&nbsp;</td><td><h4 style="font-style: italic;"><%= @customer.salutation %></h4></td></tr>
+  <tr><td><h4>Vorname:</h4></td><td>&nbsp;</td><td><h4 style="font-style: italic;"><%= @customer.first_name %></h4></td></tr>
+  <tr><td><h4>Nachname:</h4></td><td>&nbsp;</td><td><h4 style="font-style: italic;"><%= @customer.last_name %></h4></td></tr>
+  <tr><td><h4>Straße:</h4></td><td>&nbsp;</td><td><h4 style="font-style: italic;"><%= @customer.street_name %></h4></td></tr>
+  <tr><td><h4>Nr.:</h4></td><td>&nbsp;</td><td><h4 style="font-style: italic;"><%= @customer.street_number %></h4></td></tr>
+  <tr><td><h4>PLZ:</h4></td><td>&nbsp;</td><td><h4 style="font-style: italic;"><%= @customer.zip_code %></h4></td></tr>
+  <tr><td><h4>Ort:</h4></td><td>&nbsp;</td><td><h4 style="font-style: italic;"><%= @customer.city %></h4></td></tr>
+  <tr><td><h4>E-Mail:</h4></td><td>&nbsp;</td><td><h4 style="font-style: italic;"><%= @customer.email %></h4></td></tr>
+
+</table>
+
+</div>
+
+<hr class="thick-green-hr">
+
+<%= link_to "Verbindlich absenden", url_for(:controller => "order_gift_card_workflow", :action => "receive_confirmation", :order_id => @order.id), :class => 'btn btn-warning' %>
+
+<br>
+<br>
