@@ -93,6 +93,14 @@ class Order < ActiveRecord::Base
     OrderTicketsWorkflowMailer.confirmation_mail(self).deliver!
   end
 
+  def send_confirmation_mail_for_bank_transfer_payment
+    OrderGiftCardWorkflowMailer.confirmation_mail_for_bank_transfer_payment(self).deliver!
+  end
+
+  def send_confirmation_mail_for_paypal_payment
+    OrderGiftCardWorkflowMailer.confirmation_mail_for_paypal_payment(self).deliver!
+  end
+
   def cancel
 
     unless self.customer.nil? then
