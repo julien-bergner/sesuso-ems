@@ -66,9 +66,9 @@ class OrderGiftCardWorkflowController < ApplicationController
     order.payment_method = params[:payment_method]
     order.save
 
-    if order.payment_method = "bank_transfer"
+   if order.payment_method == "bank_transfer"
       redirect_to :action => "show_bank_data", :order_id => order.id
-    elsif order.payment_method = "paypal"
+    elsif order.payment_method == "paypal"
       redirect_to order.paypal_url("www.sesuso.de")
     end
   end
