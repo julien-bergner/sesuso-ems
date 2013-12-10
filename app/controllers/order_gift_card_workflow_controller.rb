@@ -19,7 +19,7 @@ class OrderGiftCardWorkflowController < ApplicationController
       flash[:error] = 'Bitte geben Sie genau 3 Ziffern ein.<br>Beispiele: 004, 049, 754, ...'.html_safe
       redirect_to :action => "enter_gift_card_number"
     else
-      product = Product.find_by_number("5922100000" + number)
+      product = Product.find_by_number(Figaro.env.gift_card_number_prefix + number)
       if product.nil?
         flash[:error] = 'Entschuldigung. Ihre Gutscheinnummer wurde nicht gefunden.<br>Bitte korrigieren Sie Ihre Eingabe oder wenden Sie sich an dance-discounter@sesuso.de!'.html_safe
         redirect_to :action => "enter_gift_card_number"
