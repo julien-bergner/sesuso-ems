@@ -14,16 +14,23 @@ class OrderGiftCardWorkflowController < ApplicationController
   end
 
   def receive_gift_card_number
-    product = Product.find_by_number(params[:gift_card][:number])
-    if product.nil?
-      flash[:error] = 'Entschuldigung. Ihre Gutscheinnummer wurde nicht gefunden.<br>Bitte korrigieren Sie Ihre Eingabe oder wenden Sie sich an dance-discounter@sesuso.de!'.html_safe
-      redirect_to :action => "enter_gift_card_number"
-    elsif product.order_items.count >= product.quantity
-      flash[:error] = 'Dieser Gutschein wurde bereits aktiviert.<br>Bitte korrigieren Sie Ihre Eingabe, geben Sie eine andere Gutscheinnummer ein oder wenden Sie sich an dance-discounter@sesuso.de!'.html_safe
+    number = params[:gift_card][:number]
+    if not number =~ /^[0-9]{3}$/
+      flash[:error] = 'Bitte geben Sie genau 3 Ziffern ein.<br>Beispiele: 004, 049, 754, ...'.html_safe
       redirect_to :action => "enter_gift_card_number"
     else
-      redirect_to :action => "enter_gift_card_amount", :product_id => product.id
+      product = Product.find_by_number("5922100000" + number)
+      if product.nil?
+        flash[:error] = 'Entschuldigung. Ihre Gutscheinnummer wurde nicht gefunden.<br>Bitte korrigieren Sie Ihre Eingabe oder wenden Sie sich an dance-discounter@sesuso.de!'.html_safe
+        redirect_to :action => "enter_gift_card_number"
+      elsif product.order_items.count >= product.quantity
+        flash[:error] = 'Dieser Gutschein wurde bereits aktiviert.<br>Bitte korrigieren Sie Ihre Eingabe, geben Sie eine andere Gutscheinnummer ein oder wenden Sie sich an dance-discounter@sesuso.de!'.html_safe
+        redirect_to :action => "enter_gift_card_number"
+      else
+        redirect_to :action => "enter_gift_card_amount", :product_id => product.id
+      end
     end
+
 
   end
 
@@ -60,7 +67,7 @@ class OrderGiftCardWorkflowController < ApplicationController
   def provide_customer_data
     @customer = Customer.new
     order_id = params[:order_id]
-    render action: "provide_customer_data", :locals => { :order_id => order_id }
+    render action: "provide_customer_data", :locals => {:order_id => order_id}
 
   end
 
@@ -75,7 +82,7 @@ class OrderGiftCardWorkflowController < ApplicationController
       redirect_to :action => "show_summary", :order_id => order.id
 
     else
-      render action: "provide_customer_data", :locals => { :order_id => order.id }
+      render action: "provide_customer_data", :locals => {:order_id => order.id}
 
     end
 
@@ -106,11 +113,11 @@ class OrderGiftCardWorkflowController < ApplicationController
     order.payment_method = params[:payment_method]
     order.save
 
-   if order.payment_method == "bank_transfer"
+    if order.payment_method == "bank_transfer"
       order.send_confirmation_mail_for_bank_transfer_payment
       redirect_to :action => "show_bank_data", :order_id => order.id
-   elsif order.payment_method == "paypal"
-     order.send_confirmation_mail_for_paypal_payment
+    elsif order.payment_method == "paypal"
+      order.send_confirmation_mail_for_paypal_payment
       redirect_to order.paypal_url("www.sesuso.de")
     end
   end
