@@ -64,10 +64,15 @@ Seat.create!( :caption => "Karte", :price => "65", :quantity => 8, :ball_table_i
 
 
 # Categories
-c = Category.create!(:caption => "Food")
-Product.create!( :caption => "Product 1", :price => "9", :quantity => 999, :category_id => c.id)
-Product.create!( :caption => "Product 2", :price => "9", :quantity => 999, :category_id => c.id)
-Product.create!( :caption => "Product 3", :price => "9", :quantity => 999, :category_id => c.id)
+c1 = Category.create!(:caption => "Food")
+Product.create!( :caption => "Product 1", :price => "9", :quantity => 999, :category_id => c1.id)
+Product.create!( :caption => "Product 2", :price => "9", :quantity => 999, :category_id => c1.id)
+Product.create!( :caption => "Product 3", :price => "9", :quantity => 999, :category_id => c1.id)
+
+c2 = Category.create!(:caption => "GiftCard")
+Product.create!( :caption => "Product 1", :price => "1", :quantity => 999, :category_id => c2.id)
+Product.create!( :caption => "Product 2", :price => "2", :quantity => 999, :category_id => c2.id)
+Product.create!( :caption => "Product 3", :price => "3", :quantity => 999, :category_id => c2.id)
 
 
 
