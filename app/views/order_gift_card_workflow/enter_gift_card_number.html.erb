@@ -2,11 +2,11 @@
     <div class="max-width-500">
 <% end %>
 
-<h3>Bitte geben Sie die Nummer <br/> auf Ihrem Gutschein ein:</h3>
+<h3>Bitte geben Sie die letzten drei Ziffern der Nummer auf Ihrem Gutschein ein:</h3>
 <%= image_tag("gift_card.png") %>
-
+<br/>
 <%= simple_form_for :gift_card, {url: url_for(:controller => "order_gift_card_workflow", :action => "receive_gift_card_number")} do |f| %>
-    <%= f.input :number, :label => false, :input_html => {:maxlength => "30", :class => "input-field"} %>
-    <%= f.button :submit, "Weiter", :class => 'btn btn-warning btn-block' %>
+     <%= f.input :number, :label => false, :input_html => {:maxlength => "3", :class => "input-field"} %>
+     <%= f.button :submit, "Weiter", :class => 'btn btn-large btn-warning btn-block' %>
 <% end %>
 
