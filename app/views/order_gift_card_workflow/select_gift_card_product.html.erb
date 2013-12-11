@@ -14,7 +14,7 @@
       <tr>
         <td>
 
-         <h2><%= number_to_currency(gift_card.get_price, unit: "&euro;", separator: ",", delimiter: "", format: "%n%u") %></h2>
+         <h2><%= gift_card.get_price %></h2>
           <%= link_to "Auswählen", url_for(:controller => "order_gift_card_workflow", :action => "receive_gift_card_product",
                                            :gift_card_number_id => @gift_card_number_id, :product_id => gift_card.id),
                                            {:class => 'btn btn-large btn-warning'} %>

@@ -1,10 +1,12 @@
 class Product < ActiveRecord::Base
+  include ActionView::Helpers::NumberHelper
+
   attr_accessible :caption, :category_id, :number, :price; :quantity
 
   has_many :order_items
 
   def get_price()
-    return "#{truncate_float_if_whole_number(self.price)}".html_safe
+    number_to_currency(self.price, unit: "&euro;", separator: ",", delimiter: "", format: "%n %u").gsub(' ','&nbsp;').html_safe
   end
 
   def truncate_float_if_whole_number(number)
