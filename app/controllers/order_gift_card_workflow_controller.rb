@@ -52,11 +52,16 @@ class OrderGiftCardWorkflowController < ApplicationController
       redirect_to :action => "instructions"
     else
 
-      #order = Order.create!(:overall_amount => product.price)
+      gift_card_number.activated = true
+      gift_card_number.save
 
-      #OrderItem.create!(:order_id => order.id, :product_id => product.id, :quantity => 1)
+      order = Order.create!()
+      order.overall_amount = order.get_overall_amount
+      order.save
 
-      redirect_to :action => "provide_customer_data", :order_id => 1
+      OrderItem.create!(:order_id => order.id, :product_id => product.id, :quantity => 1, :gift_card_number_id => gift_card_number.id )
+
+      redirect_to :action => "provide_customer_data", :order_id => order.id
     end
 
   end
