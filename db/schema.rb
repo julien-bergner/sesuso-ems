@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130918135902) do
+ActiveRecord::Schema.define(:version => 20131211031237) do
 
   create_table "ball_tables", :force => true do |t|
     t.string   "caption"
@@ -50,8 +50,9 @@ ActiveRecord::Schema.define(:version => 20130918135902) do
     t.integer  "order_id"
     t.integer  "product_id"
     t.integer  "quantity"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.integer  "gift_card_number_id"
   end
 
   create_table "order_statuses", :force => true do |t|
