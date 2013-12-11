@@ -11,7 +11,7 @@
     <%= f.input_field :amount, :label => false, :input_html => {:maxlength => "7", :class => "span2"}, :size => 20 %>
       <span class="add-on">.00 &euro;</span>
     </div>
-    <%= f.hidden_field :product_id, :value => @product_id %>
+    <%= f.hidden_field :gift_card_number_id, :value => @gift_card_number_id %>
     <%= f.button :submit, "Weiter", :class => 'btn btn-warning btn-block' %>
 <% end %>
 
