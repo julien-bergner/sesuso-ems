@@ -27,39 +27,36 @@ class OrderGiftCardWorkflowController < ApplicationController
         flash[:error] = 'Dieser Gutschein wurde bereits aktiviert.<br>Bitte korrigieren Sie Ihre Eingabe, geben Sie eine andere Gutscheinnummer ein oder wenden Sie sich an dance-discounter@sesuso.de!'.html_safe
         redirect_to :action => "enter_gift_card_number"
       else
-        redirect_to :action => "enter_gift_card_amount", :gift_card_number_id => gift_card_number.id
+        redirect_to :action => "select_gift_card_product", :gift_card_number_id => gift_card_number.id
       end
     end
 
 
   end
 
-  def enter_gift_card_amount
+  def select_gift_card_product
+
     @gift_card_number_id = params[:gift_card_number_id]
+
+    category = Category.find_by_caption("GiftCard")
+    @gift_cards = Product.find_all_by_category_id(category.id)
+
   end
 
-  def receive_amount
+  def receive_gift_card_product
 
-    product = Product.find(params[:gift_card][:product_id])
-    amount = params[:gift_card][:amount]
+    product = Product.find_by_id(params[:product_id])
+    gift_card_number = GiftCardNumber.find_by_id(params[:gift_card_number_id])
 
-    if product.nil?
-      redirect_to :action => "enter_gift_card_number"
-    elsif amount.empty?
-      flash[:error] = 'Bitte geben Sie einen Betrag ein.'.html_safe
-      redirect_to :action => "enter_gift_card_amount", :product_id => product.id
-    elsif not amount =~ /(^[0-9]*[.,][0-9]{2}$)|(^[0-9]*$)/
-      flash[:error] = 'Bitte geben Sie einen Betrag in einem Format wie 20 oder 20,50 ein.'.html_safe
-      redirect_to :action => "enter_gift_card_amount", :product_id => product.id
+    if product.nil? || gift_card_number.nil?
+      redirect_to :action => "instructions"
     else
-      product.price = amount.gsub(',', '.')
-      product.save
 
-      order = Order.create!(:overall_amount => product.price)
+      #order = Order.create!(:overall_amount => product.price)
 
-      OrderItem.create!(:order_id => order.id, :product_id => product.id, :quantity => 1)
+      #OrderItem.create!(:order_id => order.id, :product_id => product.id, :quantity => 1)
 
-      redirect_to :action => "provide_customer_data", :order_id => order.id
+      redirect_to :action => "provide_customer_data", :order_id => 1
     end
 
   end
