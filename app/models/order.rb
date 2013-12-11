@@ -1,4 +1,6 @@
 class Order < ActiveRecord::Base
+  include ActionView::Helpers::NumberHelper
+
   attr_accessible :customer_id, :delivery_method, :order_status_id, :overall_amount, :payment_method
   has_many :order_items
   belongs_to :customer
@@ -39,8 +41,8 @@ class Order < ActiveRecord::Base
       else
         row.push(order_item.product.caption)
       end
-      row.push("je #{order_item.product.get_price} &euro;".html_safe)
-      row.push("= #{order_item.product.get_price.to_i * order_item.quantity} &euro;".html_safe)
+      row.push("je #{order_item.product.get_price}".html_safe)
+      row.push("= #{number_to_currency(order_item.product.price * order_item.quantity, unit: "&euro;", separator: ",", delimiter: "", format: "%n %u").gsub(' ','&nbsp;')}".html_safe)
 
       rows.push(row)
     end
