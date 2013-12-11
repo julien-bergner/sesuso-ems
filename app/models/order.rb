@@ -42,7 +42,7 @@ class Order < ActiveRecord::Base
         row.push(order_item.product.caption.html_safe)
       end
       row.push("je #{order_item.product.get_price}".gsub(' ','&nbsp;').html_safe)
-      row.push("= #{number_to_currency(order_item.product.price * order_item.quantity, unit: "&euro;", separator: ",", delimiter: "", format: "%n %u").gsub(' ','&nbsp;')}".gsub(' ','&nbsp;').html_safe)
+      row.push("= #{number_to_currency(order_item.product.price * order_item.quantity, unit: "&euro;", separator: ",", delimiter: "", format: "%n %u")}".gsub(' ','&nbsp;').html_safe)
 
       rows.push(row)
     end
@@ -80,7 +80,7 @@ class Order < ActiveRecord::Base
 
     end
 
-    return truncate_float_if_whole_number(self.overall_amount)
+    return number_to_currency(self.overall_amount, unit: "&euro;", separator: ",", delimiter: "", format: "%n %u").gsub(' ','&nbsp;').html_safe
 
   end
 

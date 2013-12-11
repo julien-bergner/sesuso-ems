@@ -15,7 +15,7 @@
   <% end %>
 
 </table>
-<h3>Gesamtpreis: <%= number_to_currency(@order.overall_amount, unit: "&euro;", separator: ",", delimiter: "", format: "%n %u") %></h3>
+<h3>Gesamtpreis: <%= @order.overall_amount %></h3>
 
 <hr class="thick-green-hr">
 
