@@ -39,10 +39,10 @@ class Order < ActiveRecord::Base
         ballTable = BallTable.find(order_item.product.ball_table_id)
         row.push(order_item.product.caption + " an " + ballTable.caption)
       else
-        row.push(order_item.product.caption)
+        row.push(order_item.product.caption.html_safe)
       end
-      row.push("je #{order_item.product.get_price}".html_safe)
-      row.push("= #{number_to_currency(order_item.product.price * order_item.quantity, unit: "&euro;", separator: ",", delimiter: "", format: "%n %u").gsub(' ','&nbsp;')}".html_safe)
+      row.push("je #{order_item.product.get_price}".gsub(' ','&nbsp;').html_safe)
+      row.push("= #{number_to_currency(order_item.product.price * order_item.quantity, unit: "&euro;", separator: ",", delimiter: "", format: "%n %u").gsub(' ','&nbsp;')}".gsub(' ','&nbsp;').html_safe)
 
       rows.push(row)
     end
