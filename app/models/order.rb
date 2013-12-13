@@ -75,7 +75,7 @@ class Order < ActiveRecord::Base
 
     self.order_items.each do |order_item|
 
-      row_price = order_item.product.get_price.to_i * order_item.quantity
+      row_price = order_item.product.get_price. * order_item.quantity
       self.overall_amount += row_price
 
     end
