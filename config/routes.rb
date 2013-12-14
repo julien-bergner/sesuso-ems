@@ -52,6 +52,9 @@ SesusoEms::Application.routes.draw do
   # Orders
   get 'orders/send_confirmation_mail', to: 'orders#send_confirmation_mail'
 
+  # Payment notification
+  match 'payment_notification/create', to: 'payment_notificatons/create', as: :receive_payment_notification_path
+
 
 
 

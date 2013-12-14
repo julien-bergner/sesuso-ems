@@ -121,7 +121,7 @@ class OrderGiftCardWorkflowController < ApplicationController
       redirect_to :action => "show_bank_data", :order_id => order.id
     elsif order.payment_method == "paypal"
       order.send_confirmation_mail_for_paypal_payment
-      redirect_to order.paypal_url("www.sesuso.de")
+      redirect_to order.paypal_url("www.dance-discounter.de")
     end
   end
 

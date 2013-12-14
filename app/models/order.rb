@@ -5,14 +5,15 @@ class Order < ActiveRecord::Base
   has_many :order_items
   belongs_to :customer
 
-  def paypal_url(return_url)
+  def paypal_url(return_url, notify_url)
 
     values = {
         :business => Figaro.env.paypal_business_email,
         :cmd => '_cart',
         :upload => 1,
         :return => return_url,
-        :invoice => id
+        :invoice => id,
+        :notify_url => url_for(:receive_payment_notification_path)
     }
 
     self.order_items.each_with_index do |order_item, index|
