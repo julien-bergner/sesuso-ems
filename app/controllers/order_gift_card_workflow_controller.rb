@@ -1,4 +1,5 @@
 class OrderGiftCardWorkflowController < ApplicationController
+  include ActionView::Helpers::NumberHelper
   layout "order_gift_card_workflow_layout"
 
   def start
@@ -121,7 +122,7 @@ class OrderGiftCardWorkflowController < ApplicationController
       redirect_to :action => "show_bank_data", :order_id => order.id
     elsif order.payment_method == "paypal"
       order.send_confirmation_mail_for_paypal_payment
-      redirect_to order.paypal_url("www.dance-discounter.de")
+      redirect_to order.paypal_url(url_for(:paypal_return), url_for(:receive_payment_notification_path))
     end
   end
 

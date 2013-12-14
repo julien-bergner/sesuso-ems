@@ -43,6 +43,7 @@ SesusoEms::Application.routes.draw do
   get 'order_gift_card_workflow/select_payment_method', to: 'order_gift_card_workflow#select_payment_method'
   get 'order_gift_card_workflow/receive_payment_method', to: 'order_gift_card_workflow#receive_payment_method'
   get 'order_gift_card_workflow/show_bank_data', to: 'order_gift_card_workflow#show_bank_data'
+  get 'order_gift_card_workflow/paypal_return', to: 'order_gift_card_workflow#paypal_return', as: :paypal_return
 
   # Back end
   get 'back_end/overview', to: 'back_end#overview'

@@ -13,7 +13,7 @@ class Order < ActiveRecord::Base
         :upload => 1,
         :return => return_url,
         :invoice => id,
-        :notify_url => url_for(:receive_payment_notification_path)
+        :notify_url => notify_url
     }
 
     self.order_items.each_with_index do |order_item, index|
