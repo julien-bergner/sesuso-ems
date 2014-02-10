@@ -104,6 +104,10 @@ class Order < ActiveRecord::Base
     OrderGiftCardWorkflowMailer.confirmation_mail_for_paypal_payment(self).deliver!
   end
 
+  def send_confirmation_mail_to_archive
+    OrderGiftCardWorkflowMailer.confirmation_mail_to_archive(self).deliver!
+  end
+
   def cancel
 
     unless self.customer.nil? then

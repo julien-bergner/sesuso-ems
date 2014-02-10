@@ -119,9 +119,11 @@ class OrderGiftCardWorkflowController < ApplicationController
 
     if order.payment_method == "bank_transfer"
       order.send_confirmation_mail_for_bank_transfer_payment
+      order.send_confirmation_mail_to_archive
       redirect_to :action => "show_bank_data", :order_id => order.id
     elsif order.payment_method == "paypal"
       order.send_confirmation_mail_for_paypal_payment
+      order.send_confirmation_mail_to_archive
       redirect_to order.paypal_url(url_for(:paypal_return), url_for(:receive_payment_notification_path))
     end
   end
