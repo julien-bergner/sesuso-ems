@@ -16,14 +16,14 @@ Es wurde eine neue Gutscheinbestellung über die Website abgegeben:<br>
 </table>
 <br>
 
-Gutscheinnummer: <%= @gift_card_number_string %>
-Zahlungsart: <%= @payment_method_string %>
-
+Gutscheinnummer: <%= @gift_card_number_string %><br>
+Zahlungsart: <%= @payment_method_string %><br>
+<br>
 Kunde: <br>
-<%= "#{@customer.salutation} #{@customer.first_name} #{@customer.last_name}" %>
-<%= "#{@customer.street_name} #{@customer.street_number}" %>
-<%= "#{@customer.zip_code} #{@customer.city}" %>
-<%= "#{@customer.email}" %><br>
+<%= "#{@customer.salutation} #{@customer.first_name} #{@customer.last_name}" %><br>
+<%= "#{@customer.street_name} #{@customer.street_number}" %><br>
+<%= "#{@customer.zip_code} #{@customer.city}" %><br>
+<%= "#{@customer.email}" %><br><br>
 <br>
 Der Kunde hat eine E-Mail-Bestellbestätigung erhalten.
 
