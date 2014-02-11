@@ -41,7 +41,7 @@
                     <ul>
                       <li>Bestellung wurde angelegt am <%= order.created_at.in_time_zone("Berlin").to_s(:european_style) %>.</li>
                       <%= if order.order_status_id == "1" then "<li>Bestellung wurde aktiv.</li>".html_safe end %>
-                      <%= if current_user.has_role? :admin then link_to "Bestellbestätigung verschicken" , url_for(:controller => "orders", :action => "send_confirmation_mail", :id => order.id) end %><br>
+                      <!-- <%= if current_user.has_role? :admin then link_to "Bestellbestätigung verschicken" , url_for(:controller => "orders", :action => "send_confirmation_mail", :id => order.id) end %><br> -->
                       <%= if current_user.has_role? :admin then link_to "Aktivierungs-Mail verschicken" , url_for(:controller => "orders", :action => "send_gift_card_activation_mail", :id => order.id) end %>
 
                     </ul>
