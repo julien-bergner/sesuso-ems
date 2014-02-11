@@ -38,6 +38,7 @@ class OrderGiftCardWorkflowMailer < ActionMailer::Base
   def gift_card_activation_mail(order)
     @order = order
     @customer = @order.customer
+    @gift_card_number_string = @order.order_items.first.gift_card_number.number
 
     email_with_name = "#{@customer.name} <#{@customer.email}>"
     mail(to: email_with_name, subject: 'Subject')
