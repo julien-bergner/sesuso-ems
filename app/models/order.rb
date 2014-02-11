@@ -108,6 +108,10 @@ class Order < ActiveRecord::Base
     OrderGiftCardWorkflowMailer.confirmation_mail_to_archive(self).deliver!
   end
 
+  def send_gift_card_activation_mail
+    OrderGiftCardWorkflowMailer.gift_card_activation_mail(self).deliver!
+  end
+
   def cancel
 
     unless self.customer.nil? then

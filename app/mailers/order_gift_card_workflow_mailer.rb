@@ -35,4 +35,12 @@ class OrderGiftCardWorkflowMailer < ActionMailer::Base
          subject: 'Neue Gutscheinbestellung')
   end
 
+  def gift_card_activation_mail(order)
+    @order = order
+    @customer = @order.customer
+
+    email_with_name = "#{@customer.name} <#{@customer.email}>"
+    mail(to: email_with_name, subject: 'Subject')
+  end
+
 end
