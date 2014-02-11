@@ -86,10 +86,12 @@ class OrdersController < ApplicationController
   def send_confirmation_mail
     @order = Order.find(params[:id])
     @order.send_confirmation_mail
+    redirect_to :overview
   end
 
   def send_gift_card_activation_mail
     @order = Order.find(params[:id])
     @order.send_gift_card_activation_mail
+    redirect_to :overview
   end
 end
